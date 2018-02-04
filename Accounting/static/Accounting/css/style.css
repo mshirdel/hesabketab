@@ -1,0 +1,17 @@
+@import url(fonts.css);
+
+body {
+    margin: 0;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+    font-size: 14px;
+    font-family: "Sahel","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+    color: #333;
+    background: #fff;
+    direction: rtl;
+}
+
+li a {
+    color: green;
+}

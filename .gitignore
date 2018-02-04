@@ -89,3 +89,5 @@ local_settings.py
 db.sqlite3
 
 .passwords
+Accounting/__pycache__/
+hesabketab/__pycache__/
