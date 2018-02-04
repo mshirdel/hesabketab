@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Product example for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{% static 'Accounting/css/bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static 'Accounting/css/bootstrap-rtl.css'%}">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'Accounting/css/product.css'%}" rel="stylesheet">
+    <link href="{% static 'Accounting/css/style.css'%}" rel="stylesheet">
+  </head>
+
+  <body>
+    {% include "Accounting/nav.html" %}
+    
+    {% block content %}{% endblock %}
+
+    {% include "Accounting/footer.html" %}
+
+    <script src="{% static 'Accounting/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'Accounting/js/popper.min.js' %}"></script>
+    <script src="{% static 'Accounting/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'Accounting/js/holder.min.js' %}"></script>
+    <script>
+      Holder.addTheme('thumb', {
+        bg: '#55595c',
+        fg: '#eceeef',
+        text: 'Thumbnail'
+      });
+    </script>
+  </body>
+</html>
