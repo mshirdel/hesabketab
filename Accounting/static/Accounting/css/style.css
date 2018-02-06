@@ -1,8 +1,13 @@
 @import url(fonts.css);
 
 body {
-    font-size: 14px;
+    /* font-size: 14px; */
+    font-size: 1rem;
     font-family: "Yekan","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
-    color: #5a5a5a;
-    background: #fff;
+    /* color: #5a5a5a; */
+    /* background: #fff; */
+    color: #fff;
+    background: url("../img/landscape.jpg");
+    background-size: cover;
 }
+

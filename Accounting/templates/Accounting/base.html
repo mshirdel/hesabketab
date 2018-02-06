@@ -7,34 +7,46 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Product example for Bootstrap</title>
+    <title>حساب کتاب نسخه آزمایشی</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{% static 'Accounting/css/bootstrap.css'%}">
     <link rel="stylesheet" href="{% static 'Accounting/css/bootstrap-rtl.css'%}">
 
     <!-- Custom styles for this template -->
-    <link href="{% static 'Accounting/css/product.css'%}" rel="stylesheet">
     <link href="{% static 'Accounting/css/style.css'%}" rel="stylesheet">
   </head>
 
   <body>
     {% include "Accounting/nav.html" %}
-    
-    {% block content %}{% endblock %}
-
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
     {% include "Accounting/footer.html" %}
 
     <script src="{% static 'Accounting/js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'Accounting/js/popper.min.js' %}"></script>
     <script src="{% static 'Accounting/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'Accounting/js/holder.min.js' %}"></script>
-    <script>
-      Holder.addTheme('thumb', {
-        bg: '#55595c',
-        fg: '#eceeef',
-        text: 'Thumbnail'
-      });
-    </script>
+    
   </body>
 </html>

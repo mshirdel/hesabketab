@@ -1,0 +1,36 @@
+{% extends "Accounting/base.html" %} 
+{% block title %}ورود به سیستم{% endblock %} 
+
+{% block content %} 
+
+{% if form.errors %}
+<p>کلمه عبور یا نام کاربری اشتباه است. دوباره سعی کنید.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<div class="text-center">
+    <form class="form-signin" method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">ورود به پنل کاربری</h1>
+        <label for="inputEmail" class="sr-only">نام کاربری</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="نام کاربری" required autofocus>
+        <label for="inputPassword" class="sr-only">کلمه عبور</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="کلمه عبور" required>
+        <div class="checkbox mb-3">
+            <label>
+            <input type="checkbox" value="remember-me"> مرا به خاطر داشته باش
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">ورود</button>
+    </form>
+</div>
+{% endblock %}
