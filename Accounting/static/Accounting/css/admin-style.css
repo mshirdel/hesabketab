@@ -7,29 +7,11 @@ body {
     /* background: #fff; */
 }
 
-.home-page-bg {
-    background: url("../img/landscape.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    color: #fff;
-}
-
 input {
     font-size: 1rem;
     font-family: "Yekan", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
 }
 
-.modal {
-    color: black;
-    direction: ltr;
-}
-
-.modal form {
-    direction: rtl;
-}
-
 #divBase {
-    margin-top: 70px;
+    margin-top: 20px;
 }

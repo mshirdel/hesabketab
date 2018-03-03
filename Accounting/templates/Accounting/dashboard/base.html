@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>حساب کتاب نسخه آزمایشی</title>
+    <title>
+        {% block title %} حساب کتاب نسخه آزمایشی {% endblock title %}
+    </title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{% static 'Accounting/css/bootstrap.css'%}">
@@ -16,15 +17,23 @@
     <link rel="stylesheet" href="{% static 'Accounting/css/bootstrap-rtl.css'%}">
 
     <!-- Custom styles for this template -->
-    <link href="{% static 'Accounting/css/style.css'%}" rel="stylesheet">
+    <link href="{% static 'Accounting/css/admin-style.css'%}" rel="stylesheet">
 </head>
 
-<body class="home-page-bg">
-    {% include "Accounting/nav.html" %}
-    <div id="divBase" class="container">
-        {% block content %}{% endblock %}
+<body>
+    {% include "Accounting/dashboard/nav.html" %}
+    <div id="divBase" class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                    {% include "Accounting/dashboard/sidebar.html" %}
+            </div>
+            <div class="col-md-9">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        
     </div>
-    {% include "Accounting/footer.html" %}
+    {% include "Accounting/dashboard/footer.html" %}
 
     <script src="{% static 'Accounting/js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'Accounting/js/popper.min.js' %}"></script>

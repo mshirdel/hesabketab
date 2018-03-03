@@ -1,0 +1,9 @@
+{% extends "Accounting/base.html" %}
+{% block title %}
+  درباره حساب کتاب
+{% endblock title %}
+{% block content %}
+    {% if user %}
+      <h1>{{ user.username }}</h1>
+    {% endif %}
+{% endblock content %}
