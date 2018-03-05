@@ -38,15 +38,22 @@ def signout(request):
 def about_us(request):
     return render(request, 'Accounting/aboutus.html', {'user': request.user})
 
-
+@login_required(login_url= "/accounts/signin")
 def dashboard_items(request):
     return render(request, "Accounting/dashboard/sections/items.html")
 
+@login_required(login_url= "/accounts/signin")
 def dashboard_groups(request):
     return render(request, "Accounting/dashboard/sections/groups.html")
 
+@login_required(login_url= "/accounts/signin")
 def dashboard_tags(request):
     return render(request, 'Accounting/dashboard/sections/tags.html')
 
+@login_required(login_url= "/accounts/signin")
 def dashboard_import_from_csv(request):
     return render(request, 'Accounting/dashboard/sections/import_scv.html')
+
+@login_required(login_url= "/accounts/signin")
+def dashboard_profile(request):
+    return render(request, 'Accounting/dashboard/sections/profile.html', {'user': request.user})

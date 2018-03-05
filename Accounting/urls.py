@@ -16,4 +16,5 @@ urlpatterns = [
     path('dashboard/groups', views.dashboard_groups, name="dashboard_groups"),
     path('dashboard/tags', views.dashboard_tags, name="dashboard_tags"),
     path('dashboard/import-csv', views.dashboard_import_from_csv, name="dashboard_import_csv"),
+    path('dashboard/profile', views.dashboard_profile, name="dashboard_profile")
 ]
