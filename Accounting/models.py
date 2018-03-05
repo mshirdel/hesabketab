@@ -9,7 +9,6 @@ class Group(models.Model):
         verbose_name = "گروه"
         verbose_name_plural = "گروه‌ها"
 
-    
     def __str__(self):
         return self.name
 
@@ -30,7 +29,7 @@ class Item(models.Model):
         ('In', 'درآمد'),
         ('Exp', 'هزینه')
     )
-    
+
     name = models.CharField(max_length=500)
     price = models.BigIntegerField()
     date = models.DateTimeField()
@@ -45,3 +44,9 @@ class Item(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.price}"
+
+
+class UserProfile(User):
+    cell_phone = models.CharField(max_length=15, blank=True)
+    avatar_url = models.CharField(max_length=500, blank=True)
+    address = models.CharField(max_length=1000, blank=True)
