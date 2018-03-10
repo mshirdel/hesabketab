@@ -1,6 +1,11 @@
 {% extends "Accounting/dashboard/base.html" %} 
 {% load static %} 
 {% block title %} پنل مدیریتی {% endblock title %} 
-{% block content %}
-    {{user.email}}
+{% block content %} 
+    {% if user.userprofile %}
+    شماره تلفن : {{ user.userprofile.cell_phone }}   
+    {% else %}
+    ایمیل : {{ user.email }}  
+    {% endif %}
+    
 {% endblock content %}

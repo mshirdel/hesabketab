@@ -1,0 +1,61 @@
+{% extends "Accounting/dashboard/base.html" %} 
+{% block title %} پنل مدیریتی {% endblock title %} 
+{% block content %}
+    {% if errors %}
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="alert alert-danger">
+                {% for error_key, error_value in errors.items %}
+                    <li>{{error_key}} : {{error_value}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <form action="{% url 'dashboard_items_new' %}" method="POST">
+                {% csrf_token %}
+                <div class="form_group">
+                    <label for="item_name">آیتم</label>
+                    <input type="text" name="name" class="form-control" id="item_name">
+                </div>
+                <div class="form_group">
+                    <label for="item_price">قیمت</label>
+                    <input type="number" name="price" class="form-control" id="item_price">
+                </div>
+                <div class="form_group">
+                    <label for="item_date">تاریخ و زمان ایجاد</label>
+                    <input type="datetime" class="form-control" name="date" id="item_date">
+                </div>
+                <div class="form_group">
+                    <label for="item_group">گروه</label>
+                    <select name="group" id="item_group" class="form-control">
+                        {% for group in groups %}
+                            <option value="{{group.id}}">{{ group.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form_group">
+                    <label for="item_type">نوع</label>
+                    <select name="item_type" id="item_type" class="form-control">
+                        {% for item_key, item_value in item_types.items %}
+                            <option value="{{item_key}}">{{item_value}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form_group">
+                    <label for="item_tag_id">تگ‌ها</label>
+                    <select multiple name="item_tag" id="item_tag_id" class="form-control">
+                        {% for tag in tags %}
+                            <option value="{{tag.id}}">{{tag.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">ذخیره</button>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+{% endblock content%}

@@ -16,6 +16,7 @@
         <div class="col-md-5">
             <form class="form-signin" method="POST" action="{% url 'signin' %}">
                 {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
                 <div class="form-group">
                     <label for="inputEmail" class="sr-only">نام کاربری</label>
                     <input type="text" name="username" id="inputEmail" class="form-control" placeholder="نام کاربری" required autofocus>
