@@ -1,6 +1,7 @@
 {% extends "Accounting/dashboard/base.html" %} 
 {% load static %} 
 {% load humanize %}
+{% load jformat %}
 {% block title %} پنل مدیریتی {% endblock title %} 
 {% block content %}
 <div class="row pb-2">
@@ -30,7 +31,7 @@
               <td>{{item.id}}</td>
               <td>{{item.name}}</td>
               <td>{{item.price}}</td>
-              <td>{{item.date}}</td>
+              <td>{{item.date|jformat:"%Y/%m/%d"}}</td>
               <td>{{item.group}}</td>
               <td>{{item.item_type}}</td>
               <td>

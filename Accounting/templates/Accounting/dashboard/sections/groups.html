@@ -1,6 +1,36 @@
 {% extends "Accounting/dashboard/base.html" %} 
 {% load static %} 
+{% load humanize %}
 {% block title %} پنل مدیریتی {% endblock title %} 
 {% block content %}
-    دسته‌بندی دخل و خرج‌ها
+<div class="row pb-2">
+    <div class="col-md-6">
+        لیست گروه‌ها
+    </div>
+    <div class="col-md-6 text-left">
+        <a href="{% url 'dashboard_groups_new' %}" class="btn btn-primary" >افزودن</a>
+    </div>
+</div>
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">کد</th>
+            <th scope="col">آیتم</th>
+            <th scope="col">عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in object_list %}
+          <tr>
+              <td>{{item.id}}</td>
+              <td>{{item.name}}</td>
+              <td class="text-center">
+                  <a href="{% url 'dashboard_groups_delete' item.id %}" class="btn btn-danger btn-sm" >حذف</a>&nbsp|
+                  <a href="{% url 'dashboard_groups_update' item.id %}" class="btn btn-info btn-sm">ویرایش</a>
+              </td>
+          </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    
 {% endblock content %}

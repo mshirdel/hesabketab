@@ -1,15 +1,16 @@
-{% extends "Accounting/base.html" %} 
-{% block title %}ورود به سیستم{% endblock %} 
-{% block content %} 
+{% extends "Accounting/base.html" %}
+{% block title %}ورود به سیستم{% endblock %}
+{% block content %}
 {% if errors %}
-    <p class="alert alert-danger" role="alert">کلمه عبور یا نام کاربری اشتباه است. دوباره سعی کنید.</p>
-{% endif %} 
-{% if next %} 
-    {% if user.is_authenticated %}
-        <p class="alert alert-danger" role="alert">Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
-    {% else %}
-        <p class="alert alert-danger" role="alert">Please login to see this page.</p>
-    {% endif %} 
+<p class="alert alert-danger" role="alert">کلمه عبور یا نام کاربری اشتباه است. دوباره سعی کنید.</p>
+{% endif %}
+{% if next %}
+{% if user.is_authenticated %}
+<p class="alert alert-danger" role="alert">Your account doesn't have access to this page. To proceed, please login with
+    an account that has access.</p>
+{% else %}
+<p class="alert alert-danger" role="alert">Please login to see this page.</p>
+{% endif %}
 {% endif %}
 <div class="text-center">
     <div class="row justify-content-md-center">
@@ -19,11 +20,13 @@
                 <input type="hidden" name="next" value="{{ next }}">
                 <div class="form-group">
                     <label for="inputEmail" class="sr-only">نام کاربری</label>
-                    <input type="text" name="username" id="inputEmail" class="form-control" placeholder="نام کاربری" required autofocus>
+                    <input type="text" name="username" id="inputEmail" class="form-control" placeholder="نام کاربری"
+                        required autofocus>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword" class="sr-only">کلمه عبور</label>
-                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="کلمه عبور" required>
+                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="کلمه عبور"
+                        required>
                 </div>
                 <div class="checkbox mb-3">
                     <label>

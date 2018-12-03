@@ -14,7 +14,7 @@
                 <a class="nav-link" href="#">تماس با ما</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'blog' %}">وبلاگ</a>
+                <a class="nav-link" href="">وبلاگ</a>
             </li>
             {% if user.is_authenticated %}
                 <li class="nav-item">
@@ -25,7 +25,7 @@
                 </li>
             {% else %}
             <li class="nav-item">
-                    <a href="{% url 'signin'%}" class="nav-link">ورود به پنل کاربری</a>
+                <a href="{% url 'signin'%}" class="nav-link">ورود به پنل کاربری</a>
             </li>
             {% endif %}
         </ul>

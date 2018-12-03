@@ -1,5 +1,17 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+from django.urls import reverse
+
+from django_jalali.db import models as jmodels
+
+
+class TimeStampedModel(models.Model):
+    objects = jmodels.jManager()
+    created = jmodels.jDateTimeField(auto_now_add=True)
+    modified = jmodels.jDateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
 
 
 class Group(models.Model):
@@ -11,6 +23,9 @@ class Group(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('dashboard_groups_update', kwargs={'pk': self.pk})
 
 
 class Tag(models.Model):
@@ -24,7 +39,7 @@ class Tag(models.Model):
         return self.name
 
 
-class Item(models.Model):
+class Item(TimeStampedModel):
     ITEM_TYPE = (
         ('In', 'درآمد'),
         ('Exp', 'هزینه')
@@ -32,7 +47,7 @@ class Item(models.Model):
 
     name = models.CharField(max_length=500)
     price = models.BigIntegerField()
-    date = models.DateTimeField()
+    date = jmodels.jDateField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)

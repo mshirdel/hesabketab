@@ -1,0 +1,18 @@
+{% extends "Accounting/dashboard/base.html" %} 
+{% block title %} پنل مدیریتی {% endblock title %} 
+{% block content %}
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <form action="{% url 'dashboard_groups_new' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{form.name.id_for_label}}">نام گروه:</label>
+                {{form.name}}
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">ذخیره</button>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+{% endblock content%}

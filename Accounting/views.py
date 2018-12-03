@@ -1,19 +1,19 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse
+from datetime import datetime
+
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
-from django.views.generic import ListView
-from django.views import View
-from django.utils.decorators import method_decorator
 from django.core.exceptions import ValidationError
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views import View
+from django.views.generic import ListView
+from django.views.generic.edit import UpdateView, DeleteView
 
-from .models import Item, Group, Tag
-
-
-def test(request):
-    return HttpResponse("ok")
+from .forms import GroupForm, ItemForm, TagForm
+from .models import Group, Item, Tag
 
 
 def index(request):
@@ -59,24 +59,22 @@ def signout(request):
     return HttpResponseRedirect(reverse('index'))
 
 
-def about_us(request):
-    return render(request, 'Accounting/aboutus.html', {'user': request.user})
-
-
 @method_decorator(login_required(), name='dispatch')
 class DashboardItemView(ListView):
     model = Item
     template_name = "Accounting/dashboard/sections/item_list.html"
 
 
-@login_required()
-def dashboard_groups(request):
-    return render(request, "Accounting/dashboard/sections/groups.html")
+@method_decorator(login_required(), name='dispatch')
+class DashboardGroupView(ListView):
+    model = Group
+    template_name = "Accounting/dashboard/sections/groups.html"
 
 
-@login_required()
-def dashboard_tags(request):
-    return render(request, 'Accounting/dashboard/sections/tags.html')
+@method_decorator(login_required(), name="dispatch")
+class DashboardTagView(ListView):
+    model = Tag
+    template_name = "Accounting/dashboard/sections/tags.html"
 
 
 @login_required()
@@ -89,38 +87,98 @@ def dashboard_profile(request):
     return render(request, 'Accounting/dashboard/sections/profile.html', {'user': request.user})
 
 
-class DashboardItemNewView(View):
+@method_decorator(login_required(), name="dispatch")
+class DashboardGroupNewView(View):
     def get(self, request):
-        groups = Group.objects.all()
-        tags = Tag.objects.all()
-        return render(request, 'Accounting/dashboard/sections/item_new.html', {
-            'groups': groups,
-            'item_types': dict(Item.ITEM_TYPE),
-            'tags': tags
+        form = GroupForm()
+        return render(request, 'Accounting/dashboard/sections/group_new.html', {
+            'form': form
         })
 
     def post(self, request):
-        try:
+        form = GroupForm(request.POST)
+        if form.is_valid():
+            group = Group(name=form.cleaned_data['name'])
+            group.save()
+            return HttpResponseRedirect('/dashboard/groups')
+        else:
+            return render(request, 'Accounting/dashboard/sections/group_new.html', {
+                'form': form,
+            })
+
+
+@method_decorator(login_required(), name="dispatch")
+class DashboardItemNewView(View):
+    def get(self, request):
+        form = ItemForm()
+        return render(request, 'Accounting/dashboard/sections/item_new.html', {
+            'form': form,
+        })
+
+    def post(self, request):
+        form = ItemForm(request.POST)
+        if form.is_valid():
             item = Item(
-                name=request.POST["name"],
-                price=request.POST["price"],
-                date=request.POST["date"],
-                item_type=request.POST["item_type"],
-                group=Group.objects.get(id=request.POST["group"]),
+                name=form.cleaned_data["name"],
+                price=form.cleaned_data["price"],
+                date=form.cleaned_data["date"],
+                item_type=form.cleaned_data["item_type"],
+                # group=Group.objects.get(id=request.POST["group"]),
+                group=Group.objects.get(name=form.cleaned_data["group"]),
                 user=request.user
             )
-            item.full_clean()
             item.save()
-            for tagid in request.POST.getlist("item_tag"):
-                tag = Tag.objects.get(id=tagid)
+            for tag in form.cleaned_data["tags"]:
                 item.tags.add(tag)
-        except ValidationError as error:
-            groups = Group.objects.all()
-            tags = Tag.objects.all()
-            print("***************")
-            print(error.message_dict)
-            return render(request, 'Accounting/dashboard/sections/item_new.html', {'errors': error.message_dict, 'groups': groups,
-                                                                                   'item_types': dict(Item.ITEM_TYPE),
-                                                                                   'tags': tags})
+            return HttpResponseRedirect('/dashboard/items')
+        else:
+            return render(request, 'Accounting/dashboard/sections/item_new.html', {
+                'form': form,
+                'errors': form.errors,
+            })
 
-        return HttpResponseRedirect('/dashboard/items')
+
+@method_decorator(login_required(), name="dispatch")
+class DashboardTagNewView(View):
+    def get(self, request):
+        form = TagForm()
+        return render(request, 'Accounting/dashboard/sections/tag_new.html', {'form': form})
+
+    def post(self, request):
+        form = TagForm(request.POST)
+        if form.is_valid():
+            tag = Tag(name=form.cleaned_data['name'])
+            tag.save()
+            return HttpResponseRedirect('/dashboard/tags')
+        else:
+            return render(request, 'Accounting/dashboard/sections/tag_new.html', {'form': form})
+
+
+@method_decorator(login_required(), name="dispatch")
+class DashboardGroupUpdateVew(View):
+    def get(self, request, id):
+        group = get_object_or_404(Group, pk=id)
+        form = GroupForm({'name': group.name})
+        return render(request, 'Accounting/dashboard/sections/group_update.html', {'form': form})
+
+    def post(self, request):
+        form = GroupForm(request.POST)
+        if form.is_valid():
+            return render(request, 'Accounting/dashboard/sections/group_update.html', {'form': form})
+        else:
+            return render(request, 'Accounting/dashboard/sections/group_update.html', {'form': form})
+
+
+@method_decorator(login_required(), name="dispatch")
+class GroupUpdateView(UpdateView):
+    model = Group
+    fields = ['name']
+    # form_class = GroupForm
+    template_name = 'Accounting/dashboard/sections/group_update.html'
+
+
+@method_decorator(login_required(), name="dispatch")
+class GroupDeleteView(DeleteView):
+    model = Group
+    success_url = reverse_lazy('dashboard_groups')
+    template_name = 'Accounting/dashboard/sections/group_delete.html'

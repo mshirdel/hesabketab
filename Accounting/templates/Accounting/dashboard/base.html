@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{% static 'Accounting/css/admin-style.css'%}" rel="stylesheet">
+    <link href="{% static 'Accounting/css/persian-datepicker.css'%}" rel="stylesheet">
 </head>
 
 <body>
@@ -38,7 +39,16 @@
     <script src="{% static 'Accounting/js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'Accounting/js/popper.min.js' %}"></script>
     <script src="{% static 'Accounting/js/bootstrap.min.js' %}"></script>
-
+    <script src="{% static 'Accounting/js/persian-date.js' %}"></script>
+    <script src="{% static 'Accounting/js/persian-datepicker.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".datepicker").pDatepicker({
+                initialValue: false,
+                format: 'YYYY-M-D'
+            });
+        });
+    </script>
 </body>
 
 </html>
