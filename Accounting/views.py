@@ -1,4 +1,5 @@
 from datetime import datetime
+import csv
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -12,8 +13,13 @@ from django.views import View
 from django.views.generic import ListView
 from django.views.generic.edit import UpdateView, DeleteView
 
-from .forms import GroupForm, ItemForm, TagForm
+import jdatetime
+import django_tables2 as tables
+from django_tables2.paginators import LazyPaginator
+
+from .forms import GroupForm, ItemForm, TagForm, ImportCSVForm
 from .models import Group, Item, Tag
+from .tables import ItemTable
 
 
 def index(request):
@@ -60,8 +66,10 @@ def signout(request):
 
 
 @method_decorator(login_required(), name='dispatch')
-class DashboardItemView(ListView):
-    model = Item
+class DashboardItemView(tables.SingleTableView):
+    table_class = ItemTable
+    queryset = Item.objects.all().prefetch_related('group', 'tags')
+    pagination_class = LazyPaginator
     template_name = "Accounting/dashboard/sections/item_list.html"
 
 
@@ -77,9 +85,39 @@ class DashboardTagView(ListView):
     template_name = "Accounting/dashboard/sections/tags.html"
 
 
-@login_required()
-def dashboard_import_from_csv(request):
-    return render(request, 'Accounting/dashboard/sections/import_scv.html')
+@method_decorator(login_required(), name="dispatch")
+class DashboardImportCSV(View):
+    def get(self, request):
+        form = ImportCSVForm()
+        return render(request, 'Accounting/dashboard/sections/import_scv.html', {
+            'form': form
+        })
+
+    def post(self, request):
+        form = ImportCSVForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = request.FILES['file']
+            with open('data.csv', 'wb+') as destination:
+                for chunk in file.chunks():
+                    destination.write(chunk)
+            with open('data.csv', newline='') as csvfile:
+                items = csv.reader(csvfile, delimiter= ',')
+                for item in items:
+                    new_item = Item(
+                        name=item[1],
+                        price=item[2],
+                        date= jdatetime.date(int(item[0].split('/')[0]),int(item[0].split('/')[1]),int(item[0].split('/')[2])) ,
+                        item_type= 'Exp',
+                        group=Group.objects.get(id=1),
+                        user=request.user
+                    )
+                    new_item.save()
+            return HttpResponseRedirect("/dashboard/items")
+        else:
+            return render(request, 'Accounting/dashboard/sections/import_scv.html', {
+                'form': form,
+                'errors': form.errors,
+            })
 
 
 @login_required()
@@ -182,3 +220,9 @@ class GroupDeleteView(DeleteView):
     model = Group
     success_url = reverse_lazy('dashboard_groups')
     template_name = 'Accounting/dashboard/sections/group_delete.html'
+
+@method_decorator(login_required(), name="dispatch")
+class ItemUpateView(UpdateView):
+    model = Item
+    fields = ['name', 'price', 'group']
+    template_name = 'Accounting/dashboard/sections/group_update.html'

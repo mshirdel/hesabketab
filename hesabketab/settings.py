@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'debug_toolbar',
     'django_jalali',
+    'django_tables2',
 ]
 
 MIDDLEWARE = [

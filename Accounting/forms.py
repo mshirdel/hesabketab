@@ -34,3 +34,7 @@ class ItemForm(forms.Form):
     ), widget=forms.SelectMultiple(attrs={'class': 'form-control'}))
     item_type = forms.ChoiceField(widget=forms.Select(
         attrs={'class': 'form-control'}), choices=Item.ITEM_TYPE)
+
+
+class ImportCSVForm(forms.Form):
+    file = forms.FileField()

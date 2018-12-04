@@ -45,13 +45,13 @@ class Item(TimeStampedModel):
         ('Exp', 'هزینه')
     )
 
-    name = models.CharField(max_length=500)
-    price = models.BigIntegerField()
-    date = jmodels.jDateField()
+    name = models.CharField(max_length=500, verbose_name="نام")
+    price = models.BigIntegerField(verbose_name="مقدار")
+    date = jmodels.jDateField(verbose_name="تاریخ")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, verbose_name="دسته‌بندی")
     tags = models.ManyToManyField(Tag)
-    item_type = models.CharField(max_length=3, choices=ITEM_TYPE)
+    item_type = models.CharField(max_length=3, choices=ITEM_TYPE, verbose_name="نوع")
 
     class Meta:
         verbose_name = "دخل و خرج"
