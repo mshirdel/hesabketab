@@ -11,6 +11,15 @@ from Accounting.models import Group
 from Accounting.forms import GroupForm
 
 
+@method_decorator(login_required(), name='dispatch')
+class GroupListView(ListView):
+    model = Group
+    template_name = "Accounting/dashboard/sections/groups.html"
+
+    def get_queryset(self):
+        return Group.objects.filter(user=self.request.user)
+
+
 @method_decorator(login_required(), name="dispatch")
 class GroupUpdateView(UpdateView):
     model = Group
@@ -26,17 +35,8 @@ class GroupDeleteView(DeleteView):
     template_name = 'Accounting/dashboard/sections/group_delete.html'
 
 
-@method_decorator(login_required(), name='dispatch')
-class DashboardGroupView(ListView):
-    model = Group
-    template_name = "Accounting/dashboard/sections/groups.html"
-
-    def get_queryset(self):
-        return Group.objects.filter(user=self.request.user)
-
-
 @method_decorator(login_required(), name="dispatch")
-class DashboardGroupNewView(View):
+class GroupNewView(View):
     def get(self, request):
         form = GroupForm()
         return render(request, 'Accounting/dashboard/sections/group_new.html', {
@@ -46,24 +46,11 @@ class DashboardGroupNewView(View):
     def post(self, request):
         form = GroupForm(request.POST)
         if form.is_valid():
-            group = Group(name=form.cleaned_data['name'], user=self.request.user)
+            group = Group(
+                name=form.cleaned_data['name'], user=self.request.user)
             group.save()
             return HttpResponseRedirect('/dashboard/groups')
         else:
             return render(request, 'Accounting/dashboard/sections/group_new.html', {
                 'form': form,
             })
-
-@method_decorator(login_required(), name="dispatch")
-class DashboardGroupUpdateVew(View):
-    def get(self, request, id):
-        group = get_object_or_404(Group, pk=id)
-        form = GroupForm({'name': group.name})
-        return render(request, 'Accounting/dashboard/sections/group_update.html', {'form': form})
-
-    def post(self, request):
-        form = GroupForm(request.POST)
-        if form.is_valid():
-            return render(request, 'Accounting/dashboard/sections/group_update.html', {'form': form})
-        else:
-            return render(request, 'Accounting/dashboard/sections/group_update.html', {'form': form})

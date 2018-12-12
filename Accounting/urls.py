@@ -26,16 +26,14 @@ urlpatterns = [
          views.ItemUpateView.as_view(), name="dashboard_item_update"),
 
     # ******************** GROUP URLS *****************************************
-    path('dashboard/groups', views.DashboardGroupView.as_view(),
+    path('dashboard/groups', views.GroupListView.as_view(),
          name="dashboard_groups"),
-    path('dashboard/groups/new', views.DashboardGroupNewView.as_view(),
+    path('dashboard/groups/new', views.GroupNewView.as_view(),
          name="dashboard_groups_new"),
     path('dashboard/groups/<int:pk>/update',
          views.GroupUpdateView.as_view(), name='dashboard_groups_update'),
     path('dashboard/groups/<int:pk>/delete',
          views.GroupDeleteView.as_view(), name='dashboard_groups_delete'),
-    path('dashboard/groups/update',
-         views.DashboardGroupUpdateVew.as_view(), name='dashboard_group_edit'),
 
     # ******************** TAG URLS *******************************************
     path('dashboard/tags', views.DashboardTagView.as_view(), name="dashboard_tags"),
