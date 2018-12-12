@@ -3,6 +3,7 @@
 
 <head>
     {% load static %}
+    {% load humanize %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -26,9 +27,11 @@
     <div id="divBase" class="container-fluid">
         <div class="row">
             <div class="col-md-3">
-                    {% include "Accounting/dashboard/sidebar.html" %}
+                {% include "Accounting/dashboard/sidebar.html" %}
             </div>
             <div class="col-md-9">
+                {{ 12000000|intcomma }}
+                <br/>
                 {% block content %}{% endblock %}
             </div>
         </div>

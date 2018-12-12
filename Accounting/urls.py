@@ -1,13 +1,13 @@
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from . import views
+from Accounting import views
 
 urlpatterns = [
     # ******************** DEFAULT URLS ***************************************
     path('', views.index, name='index'),
     path('AboutUs/', TemplateView.as_view(template_name="Accounting/aboutus.html"), name='about_us'),
-    path('ContactUs/', views.index, name='contact_us'),
+    path('ContactUs/', views.contactus, name='contact_us'),
     # ******************** ACCOUNTING URLS ************************************
     # path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signin', views.SignIn.as_view(), name='signin'),
@@ -20,7 +20,7 @@ urlpatterns = [
     # ******************** ITEM URLS ******************************************
     path('dashboard/items', views.DashboardItemView.as_view(),
          name="dashboard_items"),
-    path('dashboard/items/new', views.DashboardItemNewView.as_view(),
+    path('dashboard/items/new', views.NewItemView.as_view(),
          name="dashboard_items_new"),
     path('dashboard/items/<int:pk>/update',
          views.ItemUpateView.as_view(), name="dashboard_item_update"),

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'django_jalali',
     'django_tables2',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

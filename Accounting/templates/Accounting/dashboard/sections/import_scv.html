@@ -2,6 +2,11 @@
 {% load static %} 
 {% block title %} پنل مدیریتی {% endblock title %} 
 {% block content %}
+{% if errors %}
+<div class="alert alert-danger" role="alert">
+  {{ errors }}
+</div>
+{% endif %}
     <h3>ورود دخل و خرج از فایل csv</h3>
 <div class="row">
     <div class="col-md-3"></div>

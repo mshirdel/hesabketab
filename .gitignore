@@ -94,3 +94,4 @@ hesabketab/__pycache__/
 .vscode
 hesabketab/__pycache__/*.pyc
 *.csv
+.vscode/

@@ -16,6 +16,7 @@ class TimeStampedModel(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "گروه"
@@ -30,6 +31,7 @@ class Group(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "تگ"
