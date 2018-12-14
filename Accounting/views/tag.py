@@ -1,16 +1,16 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, UpdateView, DeleteView
 
 from Accounting.forms import TagForm
 from Accounting.models import Tag
 
 
 @method_decorator(login_required(), name="dispatch")
-class DashboardTagView(ListView):
+class TagListView(ListView):
     model = Tag
     template_name = "Accounting/dashboard/sections/tags.html"
 
@@ -19,7 +19,7 @@ class DashboardTagView(ListView):
 
 
 @method_decorator(login_required(), name="dispatch")
-class DashboardTagNewView(View):
+class TagNewView(View):
     def get(self, request):
         form = TagForm()
         return render(request, 'Accounting/dashboard/sections/tag_new.html', {'form': form})
@@ -32,3 +32,11 @@ class DashboardTagNewView(View):
             return HttpResponseRedirect('/dashboard/tags')
         else:
             return render(request, 'Accounting/dashboard/sections/tag_new.html', {'form': form})
+
+
+@method_decorator(login_required(), name="dispatch")
+class TagUpdateView(UpdateView):
+    model = Tag
+    fields = ["name"]
+    template_name = 'Accounting/dashboard/sections/tag_update.html'
+    success_url = '/dashboard/tags'

@@ -26,7 +26,7 @@
               <td>{{item.name}}</td>
               <td class="text-center">
                   <a href="" class="btn btn-danger btn-sm" >حذف</a>&nbsp|
-                  <a href="" class="btn btn-info btn-sm">ویرایش</a>
+                  <a href="{% url 'dashboard_tag_update' item.id %}" class="btn btn-info btn-sm">ویرایش</a>
               </td>
           </tr>
         {% endfor %}

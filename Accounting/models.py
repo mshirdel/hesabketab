@@ -40,6 +40,9 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('dashboard_tag_update', kwargs={'pk': self.pk})
+
 
 class Item(TimeStampedModel):
     ITEM_TYPE = (

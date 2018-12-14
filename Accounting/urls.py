@@ -36,10 +36,11 @@ urlpatterns = [
          views.GroupDeleteView.as_view(), name='dashboard_groups_delete'),
 
     # ******************** TAG URLS *******************************************
-    path('dashboard/tags', views.DashboardTagView.as_view(), name="dashboard_tags"),
-    path('dashboard/tags/new', views.DashboardTagNewView.as_view(),
+    path('dashboard/tags', views.TagListView.as_view(), name="dashboard_tags"),
+    path('dashboard/tags/new', views.TagNewView.as_view(),
          name="dashboard_tags_new"),
-
+     path('dashboard/tags/<int:pk>/update', views.TagUpdateView.as_view(), 
+          name="dashboard_tag_update"),
     # ******************** OTHER URLS *****************************************
     path('dashboard/import-csv', views.DashboardImportCSV.as_view(),
          name="dashboard_import_csv"),
