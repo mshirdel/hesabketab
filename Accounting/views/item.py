@@ -19,7 +19,9 @@ class DashboardItemView(tables.SingleTableView):
     template_name = "Accounting/dashboard/sections/item_list.html"
 
     def get_queryset(self):
-        return Item.objects.filter(user=self.request.user).prefetch_related('group', 'tags').order_by('-date')
+        return Item.objects.filter(user=self.request.user).prefetch_related('group', 'tags') \
+            .order_by('-date')
+            #.exclude('tags', 'tags').only('id', 'name', 'date', 'price', 'group', '')
 
 
 @method_decorator(login_required(), name="dispatch")

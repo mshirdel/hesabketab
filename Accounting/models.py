@@ -54,13 +54,18 @@ class Item(TimeStampedModel):
     price = models.BigIntegerField(verbose_name="مقدار")
     date = jmodels.jDateField(verbose_name="تاریخ")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, verbose_name="دسته‌بندی")
+    group = models.ForeignKey(
+        Group, on_delete=models.CASCADE, verbose_name="دسته‌بندی")
     tags = models.ManyToManyField(Tag)
-    item_type = models.CharField(max_length=3, choices=ITEM_TYPE, verbose_name="نوع")
+    item_type = models.CharField(
+        max_length=3, choices=ITEM_TYPE, verbose_name="نوع")
 
     class Meta:
         verbose_name = "دخل و خرج"
         verbose_name_plural = "دخل و خرج"
+        indexes = [
+            models.Index(fields=['name', 'date'])
+        ]
 
     def __str__(self):
         return f"{self.name} - {self.price}"

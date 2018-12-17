@@ -1,6 +1,9 @@
 from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render, reverse
 
+from django.contrib.auth.models import User
+from Accounting.models import Item
+
 
 def index(request):
     if request.user.is_authenticated:
@@ -11,3 +14,10 @@ def index(request):
 
 def contactus(request):
     return HttpResponseNotFound('<h1>Page not found</h1>')
+
+
+def test(request):
+    user = User.objects.get(pk=1)
+    items = Item.objects.filter(user=user).prefetch_related('group', 'tags') \
+            .order_by('-date')[:20]
+    return render(request, 'Accounting/test.html', {'data': items})

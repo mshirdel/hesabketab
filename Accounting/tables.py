@@ -19,6 +19,6 @@ class ItemTable(tables.Table):
 
     class Meta:
         model = Item
-        exclude = ('created', 'modified', 'user')
+        exclude = ('created', 'modified', 'user', 'tags')
         per_page = 20
         template_name = 'django_tables2/bootstrap-responsive.html'
