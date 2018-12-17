@@ -4,8 +4,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, DeleteView
 from django_tables2.paginators import LazyPaginator
+from django.urls import reverse_lazy
 
 from Accounting.forms import ItemForm
 from Accounting.models import Group, Item
@@ -57,7 +58,15 @@ class NewItemView(View):
 @method_decorator(login_required(), name="dispatch")
 class ItemUpateView(UpdateView):
     model = Item
-    # form_class = ItemForm
-    fields = ['name', 'price', 'group', 'tags', 'item_type', 'date']
+    form_class = ItemForm
+    # fields = ['name', 'price', 'group', 'tags', 'item_type', 'date']
     template_name = 'Accounting/dashboard/sections/item_update.html'
-    success_url = '/dashboard/items'
+    success_url = reverse_lazy("dashboard_items")
+
+
+@method_decorator(login_required(), name="dispatch")
+class ItemDeleteView(DeleteView):
+    model = Item
+    template_name = 'Accounting/dashboard/sections/item_delete.html'
+    success_url = reverse_lazy("dashboard_items")
+

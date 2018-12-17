@@ -25,6 +25,8 @@ urlpatterns = [
          name="dashboard_items_new"),
     path('dashboard/items/<int:pk>/update',
          views.ItemUpateView.as_view(), name="dashboard_item_update"),
+     path('dashboard/items/<int:pk>/delete', views.ItemDeleteView.as_view(),
+          name="dashboard_item_delete"),
 
     # ******************** GROUP URLS *****************************************
     path('dashboard/groups', views.GroupListView.as_view(),
@@ -42,6 +44,7 @@ urlpatterns = [
          name="dashboard_tags_new"),
      path('dashboard/tags/<int:pk>/update', views.TagUpdateView.as_view(), 
           name="dashboard_tag_update"),
+     path('dashboard/tags/<int:pk>/delete', views.TagDeleteView.as_view(), name="dashboard_tag_delete"),
     # ******************** OTHER URLS *****************************************
     path('dashboard/import-csv', views.DashboardImportCSV.as_view(),
          name="dashboard_import_csv"),

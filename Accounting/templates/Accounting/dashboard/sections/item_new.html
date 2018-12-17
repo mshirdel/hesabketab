@@ -39,7 +39,8 @@
                 <label for="{{form.item_type.id_for_lable}}">نوع:</label>
                 {{form.item_type}}
             </div>
-            <button type="submit" class="btn btn-primary mt-2">ذخیره</button>
+            <button type="submit" class="btn btn-success mt-2">ذخیره</button>
+            <a href="{% url 'dashboard_items' %}" class="btn btn-primary mt-2">بازگشت</a>
         </form>
     </div>
     <div class="col-md-3"></div>

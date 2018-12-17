@@ -6,12 +6,9 @@
     <div class="col-md-6">
         <form action="" method="POST">
             {% csrf_token %}
-            <div class="form-group">
-                <label for="{{form.name.id_for_label}}">نام تگ:</label>
-                {{form.name}}
-            </div>
-            <button type="submit" class="btn btn-success mt-2">ویرایش</button>
-            <a href="{% url 'dashboard_tags' %}" class="btn btn-primary mt-2">بازگشت</a>
+            <p>آیا تگ {{object}} حذف شود؟</p>
+            <button type="submit" class="btn btn-danger mt-2">حذف</button>
+            <a href="{% url 'dashboard_tags' %}" class="btn btn-primary mt-2">خیر</a>
         </form>
     </div>
     <div class="col-md-3"></div>

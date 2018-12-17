@@ -15,13 +15,17 @@ class TagForm(forms.ModelForm):
         fields = ['name']
 
 
-class GroupForm(forms.Form):
+class GroupForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control'})
     )
 
+    class Meta:
+        model = Group
+        fields = ['name']
 
-class ItemForm(forms.Form):
+
+class ItemForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control'}))
     price = forms.IntegerField(
@@ -34,6 +38,10 @@ class ItemForm(forms.Form):
     ), widget=forms.SelectMultiple(attrs={'class': 'form-control'}))
     item_type = forms.ChoiceField(widget=forms.Select(
         attrs={'class': 'form-control'}), choices=Item.ITEM_TYPE)
+
+    class Meta:
+        model = Item
+        fields = ['name', 'price', 'date', 'group', 'tags', 'item_type']
 
 
 class ImportCSVForm(forms.Form):

@@ -4,6 +4,7 @@ from django.shortcuts import render, reverse
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import ListView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 from Accounting.forms import TagForm
 from Accounting.models import Tag
@@ -37,6 +38,13 @@ class TagNewView(View):
 @method_decorator(login_required(), name="dispatch")
 class TagUpdateView(UpdateView):
     model = Tag
-    fields = ["name"]
+    form_class = TagForm
     template_name = 'Accounting/dashboard/sections/tag_update.html'
-    success_url = '/dashboard/tags'
+    success_url = reverse_lazy("dashboard_tags")
+
+
+@method_decorator(login_required(), name="dispatch")
+class TagDeleteView(DeleteView):
+    model = Tag
+    success_url = reverse_lazy("dashboard_tags")
+    template_name = 'Accounting/dashboard/sections/tag_delete.html'

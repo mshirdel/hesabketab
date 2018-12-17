@@ -23,9 +23,10 @@ class GroupListView(ListView):
 @method_decorator(login_required(), name="dispatch")
 class GroupUpdateView(UpdateView):
     model = Group
-    fields = ['name']
-    # form_class = GroupForm
+    # fields = ['name']
+    form_class = GroupForm
     template_name = 'Accounting/dashboard/sections/group_update.html'
+    success_url = reverse_lazy("dashboard_groups")
 
 
 @method_decorator(login_required(), name="dispatch")
