@@ -40,8 +40,7 @@ class NewItemView(View):
                 price=form.cleaned_data["price"],
                 date=form.cleaned_data["date"],
                 item_type=form.cleaned_data["item_type"],
-                # group=Group.objects.get(id=request.POST["group"]),
-                group=Group.objects.get(name=form.cleaned_data["group"]),
+                group=form.cleaned_data["group"],
                 user=request.user
             )
             item.save()
@@ -61,3 +60,4 @@ class ItemUpateView(UpdateView):
     # form_class = ItemForm
     fields = ['name', 'price', 'group', 'tags', 'item_type', 'date']
     template_name = 'Accounting/dashboard/sections/item_update.html'
+    success_url = '/dashboard/items'

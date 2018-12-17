@@ -15,7 +15,8 @@
         <form action="" method="POST">
             {% csrf_token %}
             <table>{{ form.as_table }}</table>
-            <button type="submit" class="btn btn-primary mt-2">ویرایش</button>
+            <button type="submit" class="btn btn-success mt-2">ویرایش</button>
+            <a href="{% url 'dashboard_items' %}" class="btn btn-primary mt-2">بازگشت</a>
         </form>
     </div>
     <div class="col-md-3"></div>
