@@ -14,40 +14,6 @@
     </div>
 </div>
 {% render_table table %}
-<!-- <table class="table table-striped table-bordered table-hover">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">کد</th>
-            <th scope="col">آیتم</th>
-            <th scope="col">قیمت</th>
-            <th scope="col">زمان</th>
-            <th scope="col">گروه</th>
-            <th scope="col">نوع</th>
-            <th scope="col">تگ</th>
-            <th scope="col">عملیات</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in object_list %}
-          <tr>
-              <td>{{item.id}}</td>
-              <td>{{item.name}}</td>
-              <td>{{item.price}}</td>
-              <td>{{item.date|jformat:"%Y/%m/%d"}}</td>
-              <td>{{item.group}}</td>
-              <td>{{item.item_type}}</td>
-              <td>
-                  {% for tag in item.tags.all%}
-                    <span class="badge badge-success">{{ tag.name }}</span>
-                  {% endfor %}
-              </td>
-              <td class="text-center">
-                  <a href="" class="btn btn-danger btn-sm" >حذف</a>&nbsp|
-                  <a href="" class="btn btn-info btn-sm">ویرایش</a>
-              </td>
-          </tr>
-        {% endfor %}
-    </tbody>
-</table> -->
+
     
 {% endblock content %}
