@@ -31,7 +31,8 @@ class ItemForm(forms.ModelForm):
     price = forms.IntegerField(
         widget=forms.NumberInput(attrs={'class': 'form-control'}))
     # date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'form-control'}))
-    date = jforms.jDateField(widget=jforms.widgets.jDateInput(attrs={'class': 'form-control datepicker'}))
+    date = jforms.jDateField(widget=jforms.widgets.jDateInput(
+        attrs={'class': 'form-control datepicker'}))
     group = forms.ModelChoiceField(queryset=Group.objects.all(
     ), widget=forms.Select(attrs={'class': 'form-control'}))
     tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all(

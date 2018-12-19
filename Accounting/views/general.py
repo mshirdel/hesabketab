@@ -3,6 +3,7 @@ from django.shortcuts import render, reverse
 
 from django.contrib.auth.models import User
 from Accounting.models import Item
+from Accounting.filters import ItemFilter
 
 
 def index(request):
@@ -19,5 +20,8 @@ def contactus(request):
 def test(request):
     user = User.objects.get(pk=1)
     items = Item.objects.filter(user=user).prefetch_related('group', 'tags') \
-            .order_by('-date')[:20]
-    return render(request, 'Accounting/test.html', {'data': items})
+            .order_by('-date')
+    item_filter = ItemFilter({}, queryset = items)
+    # import pdb
+    # pdb.set_trace()
+    return render(request, 'Accounting/test.html', {'filter': item_filter})

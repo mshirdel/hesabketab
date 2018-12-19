@@ -11,6 +11,7 @@ from django.urls import reverse_lazy
 from Accounting.forms import ItemForm
 from Accounting.models import Group, Item
 from Accounting.tables import ItemTable
+from Accounting.utils import convert_string_date_to_jdate
 
 
 @method_decorator(login_required(), name='dispatch')
@@ -20,9 +21,32 @@ class DashboardItemView(tables.SingleTableView):
     template_name = "Accounting/dashboard/sections/item_list.html"
 
     def get_queryset(self):
-        return Item.objects.filter(user=self.request.user).prefetch_related('group', 'tags') \
+        result = Item.objects.filter(user=self.request.user).prefetch_related('group', 'tags') \
             .order_by('-date')
-            #.exclude('tags', 'tags').only('id', 'name', 'date', 'price', 'group', '')
+        if 'filter_name' in self.request.GET:
+            filter_name = self.request.GET['filter_name']
+            result = result.filter(name__contains=filter_name)
+        if 'filter_price_from' in self.request.GET:
+            filter_price_from = self.request.GET['filter_price_from']
+            if filter_price_from:
+                result = result.filter(price__gte = int(filter_price_from))
+        if 'filter_price_to' in self.request.GET:
+            filter_price_to = self.request.GET['filter_price_to']
+            if filter_price_to:
+                result = result.filter(price__lte = int(filter_price_to))
+        if 'filter_date_from' in self.request.GET:
+            filter_date_from = self.request.GET['filter_date_from']
+            if filter_date_from:
+                date_from = convert_string_date_to_jdate(filter_date_from)
+                if date_from:
+                    result = result.filter(date__gte=date_from)
+        if 'filter_date_to' in self.request.GET:
+            filter_date_to = self.request.GET['filter_date_to']
+            if filter_date_to:
+                date_to = convert_string_date_to_jdate(filter_date_to)
+                if date_to:
+                    result = result.filter(date__lte=date_to)
+        return result
 
 
 @method_decorator(login_required(), name="dispatch")

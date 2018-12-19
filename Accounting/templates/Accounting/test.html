@@ -1,7 +1,15 @@
 {% extends "Accounting/base.html" %} 
 {% block title %}{% endblock %}
 {% block content %}
-{% for item in data %}
-    {{item.name}}
-{% endfor %}
+{% if filter %}
+    <form method="get">
+        {{ filter.form.as_table }}
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    <h3>{{ filter.qs.count }}</h3>
+    {% for item in filter.qs %}
+        {{ item.name }} <br/>
+    {% endfor %}
+{% endif %}
+
 {% endblock content%}

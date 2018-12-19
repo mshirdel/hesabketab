@@ -20,3 +20,11 @@ def import_items(user, file_name='data.csv'):
             Item.objects.bulk_create(new_items)
     except:
         raise Exception("Error in importing")
+
+def convert_string_date_to_jdate(date):
+    import jdatetime
+    if date:
+        year = int(date.split('-')[0])
+        month = int(date.split('-')[1])
+        day = int(date.split('-')[2])
+        return jdatetime.date(year,month,day)
