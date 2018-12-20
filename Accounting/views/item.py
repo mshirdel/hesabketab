@@ -6,47 +6,42 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import UpdateView, DeleteView
 from django_tables2.paginators import LazyPaginator
+import django_tables2
 from django.urls import reverse_lazy
 
 from Accounting.forms import ItemForm
 from Accounting.models import Group, Item
 from Accounting.tables import ItemTable
 from Accounting.utils import convert_string_date_to_jdate
+from Accounting.filters import ItemFilter
 
 
-@method_decorator(login_required(), name='dispatch')
-class DashboardItemView(tables.SingleTableView):
-    table_class = ItemTable
-    pagination_class = LazyPaginator
-    template_name = "Accounting/dashboard/sections/item_list.html"
+class FilteredSingleTableView(django_tables2.SingleTableView):
+    filter_class = None
+
+    def get_table_data(self):
+        data = super(FilteredSingleTableView, self).get_table_data()
+        self.filter = self.filter_class(self.request.GET, queryset=data)
+        return self.filter.qs
+
+    def get_context_data(self, **kwargs):
+        context = super(FilteredSingleTableView,
+                        self).get_context_data(**kwargs)
+        context['filter'] = self.filter
+        return context
 
     def get_queryset(self):
         result = Item.objects.filter(user=self.request.user).prefetch_related('group', 'tags') \
             .order_by('-date')
-        if 'filter_name' in self.request.GET:
-            filter_name = self.request.GET['filter_name']
-            result = result.filter(name__contains=filter_name)
-        if 'filter_price_from' in self.request.GET:
-            filter_price_from = self.request.GET['filter_price_from']
-            if filter_price_from:
-                result = result.filter(price__gte = int(filter_price_from))
-        if 'filter_price_to' in self.request.GET:
-            filter_price_to = self.request.GET['filter_price_to']
-            if filter_price_to:
-                result = result.filter(price__lte = int(filter_price_to))
-        if 'filter_date_from' in self.request.GET:
-            filter_date_from = self.request.GET['filter_date_from']
-            if filter_date_from:
-                date_from = convert_string_date_to_jdate(filter_date_from)
-                if date_from:
-                    result = result.filter(date__gte=date_from)
-        if 'filter_date_to' in self.request.GET:
-            filter_date_to = self.request.GET['filter_date_to']
-            if filter_date_to:
-                date_to = convert_string_date_to_jdate(filter_date_to)
-                if date_to:
-                    result = result.filter(date__lte=date_to)
         return result
+
+
+@method_decorator(login_required(), name='dispatch')
+class ItemFilteredSingleTableView(FilteredSingleTableView):
+    model = Item
+    table_class = ItemTable
+    filter_class = ItemFilter
+    template_name = "Accounting/dashboard/sections/item_list.html"
 
 
 @method_decorator(login_required(), name="dispatch")
@@ -93,4 +88,3 @@ class ItemDeleteView(DeleteView):
     model = Item
     template_name = 'Accounting/dashboard/sections/item_delete.html'
     success_url = reverse_lazy("dashboard_items")
-

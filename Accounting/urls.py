@@ -19,8 +19,8 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
 
     # ******************** ITEM URLS ******************************************
-    path('dashboard/items', views.DashboardItemView.as_view(),
-         name="dashboard_items"),
+     path('dashboard/items', views.ItemFilteredSingleTableView.as_view(),
+          name="dashboard_items"),
     path('dashboard/items/new', views.NewItemView.as_view(),
          name="dashboard_items_new"),
     path('dashboard/items/<int:pk>/update',

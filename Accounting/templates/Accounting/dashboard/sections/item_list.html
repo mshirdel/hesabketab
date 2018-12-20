@@ -2,7 +2,7 @@
 {% load static %} 
 {% load humanize %}
 {% load jformat %}
-{% load django_tables2 %}
+{% load render_table from django_tables2 %}
 {% block title %} پنل مدیریتی {% endblock title %} 
 {% block content %}
 <div class="row pb-2">
@@ -13,36 +13,77 @@
         <a href="{% url 'dashboard_items_new' %}" class="btn btn-primary" >افزودن</a>
     </div>
 </div>
-<form action="{% url 'dashboard_items' %}" method="get">
 <div class="row">
-        {% csrf_token %}
-        <div class="col-md-4">
-            <div class="form-group">
-                <label>نام:</label>
-                <input type="text" name="filter_name" class="form-control form-control-sm"></input>
+    <div class="col-md-12">
+        <form method='GET'>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>نام:</label>
+                        {{ filter.form.name }}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>مقدار از:</label>
+                            {{ filter.form.price_gte }}
+                        </div>
+                        <div class="col-md-6">
+                        <label>مقدار تا:</label>
+                        {{ filter.form.price_lte }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>تاریخ از:</label>
+                            {{ filter.form.date_gte }}
+                        </div>
+                        <div class="col-md-6">
+                            <label>تاریخ تا:</label>
+                            {{ filter.form.date_lte }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>دسته‌بندی:</label>
+                            {{ filter.form.group }}
+                        </div>
+                        <div class="col-md-6">
+                            <label>نوع:</label>
+                            {{ filter.form.item_type }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>تگ‌ها:</label>
+                            {{ filter.form.tags }}
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success mt-2">اعمال فیلتر</button>
+                                <a href='{{ request.path }}'>حذف فیلتر</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-success mt-2">اعمال فیلتر</button>
-                <button type="submit" class="btn btn-primary mt-2">حدف فیلتر</button>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label>مقدار از:</label>
-                <input type="number" name="filter_price_from" class="form-control form-control-sm"></input>
-                <label>مقدار تا:</label>
-                <input type="number" name="filter_price_to" class="form-control form-control-sm"></input>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label>تاریخ از:</label>    
-                    <input type="text" name="filter_date_from" class="form-control form-control-sm datepicker">
-                    <label>تاریخ تا:</label>
-                    <input type="text" name="filter_date_to" class="form-control form-control-sm datepicker">
-            </div>
-        </div>
+        </form>
+    </div>
 </div>
-</form>
-{% render_table table %}
+<br/>
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-primary" role="alert">
+            تعداد موارد پیدا شده: {{ filter.qs.count }} از {{ filter.queryset.count }}    
+        </div>
+    </div>
+</div>
+{% if table %}
+    <div class="row">
+        <div class="col-md-12">
+            {% render_table table %}
+        </div>
+    </div>
+{% endif %}
 {% endblock content %}
