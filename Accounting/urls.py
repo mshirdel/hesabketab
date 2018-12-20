@@ -9,7 +9,6 @@ urlpatterns = [
     path('AboutUs/', TemplateView.as_view(template_name="Accounting/aboutus.html"), name='about_us'),
     path('ContactUs/', views.contactus, name='contact_us'),
     path('test/', views.test),
-    path('demo/', views.demo),
     # ******************** ACCOUNTING URLS ************************************
     # path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signin', views.SignIn.as_view(), name='signin'),

@@ -25,7 +25,3 @@ def test(request):
     # import pdb
     # pdb.set_trace()
     return render(request, 'Accounting/test.html', {'filter': item_filter})
-
-
-def demo(request):
-    return render(request, 'Accounting/demo.html')
