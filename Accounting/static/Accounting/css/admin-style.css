@@ -4,7 +4,7 @@ body {
     font-size: 1rem;
     font-family: "Yekan", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
     /* color: #5a5a5a; */
-    /* background: #fff; */
+    background: #ecf0f5;
 }
 
 input {
@@ -12,6 +12,33 @@ input {
     font-family: "Yekan", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
 }
 
-#divBase {
-    /* margin-top: 20px; */
+a{
+    color: #17a2b8;
+}
+
+.admin-panel{
+    background-color:#fff;
+    padding: 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-top-color: #17a2b8;
+    border-top-width: 3px;
+    border-top-style: solid;
+    box-shadow: rgba(0 , 0, 0, 0.1) 0px 1px 1px 0px;
+}
+
+.sidebar {
+    background-color:#fff;
+    padding: 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    box-shadow: rgba(0 , 0, 0, 0.1) 0px 1px 1px 0px;
+}
+
+.admin-panel-header{
+    border-bottom-style: solid;
+    border-bottom-color: #ecf0f5;
+    border-bottom-width: 1px;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
 }

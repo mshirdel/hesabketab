@@ -1,5 +1,8 @@
 {% extends "Accounting/dashboard/base.html" %} 
 {% block title %} پنل مدیریتی {% endblock title %} 
+{% block content-header %}
+    ویرایش : {{ form.name.value }}
+{% endblock content-header %}
 {% block content %}
 {% if form.errors %}
     <h3>خطا</h3>

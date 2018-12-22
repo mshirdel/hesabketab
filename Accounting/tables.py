@@ -11,7 +11,7 @@ class ItemTable(tables.Table):
     commands = tables.Column(empty_values=(), verbose_name="عملیات")
 
     def render_commands(self, record):
-        return format_html(f"<a href='items/{record.id}/update' class='btn btn-primary btn-sm' >ویرایش</a>&nbsp<a href='items/{record.id}/delete' class='btn btn-danger btn-sm' >حذف</a>")
+        return format_html(f"<a href='items/update/{record.id}' class='btn btn-primary btn-sm' >ویرایش</a>&nbsp<a href='items/delete/{record.id}' class='btn btn-danger btn-sm' >حذف</a>")
 
     def render_price(self, value):
         orig = str(value)

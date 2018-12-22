@@ -1,7 +1,9 @@
 {% extends "Accounting/dashboard/base.html" %} 
 {% block title %} پنل مدیریتی {% endblock title %} 
+{% block content-header %}
+    دخل و خرج جدید
+{% endblock content-header %}
 {% block content %}
-<h3>دخل و خرج جدید</h3>
 {% if form.errors %}
     <h1>errors</h1>
     {% for error,desc in form.errors.items %}

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="rtl">
 
 <head>
     {% load static %}
@@ -13,8 +13,6 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{% static 'Accounting/css/bootstrap.css'%}">
-    <!-- <link rel="stylesheet" href="{% static 'Accounting/css/bootstrap-theme.css'%}"> -->
-    <link rel="stylesheet" href="{% static 'Accounting/css/bootstrap-rtl.css'%}">
 
     <!-- Custom styles for this template -->
     <link href="{% static 'Accounting/css/admin-style.css'%}" rel="stylesheet">
@@ -31,7 +29,11 @@
             </div>
             <div class="col-md-9">
                 <br/>
+                <div class="admin-panel">
+                    <div class="admin-panel-header">{% block content-header %}
+                    {% endblock content-header %}</div>
                 {% block content %}{% endblock %}
+                </div>
             </div>
         </div>
         

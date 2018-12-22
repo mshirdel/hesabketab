@@ -23,9 +23,9 @@ urlpatterns = [
           name="dashboard_items"),
     path('dashboard/items/new', views.NewItemView.as_view(),
          name="dashboard_items_new"),
-    path('dashboard/items/<int:pk>/update',
+    path('dashboard/items/update/<int:pk>',
          views.ItemUpateView.as_view(), name="dashboard_item_update"),
-     path('dashboard/items/<int:pk>/delete', views.ItemDeleteView.as_view(),
+     path('dashboard/items/delete/<int:pk>', views.ItemDeleteView.as_view(),
           name="dashboard_item_delete"),
 
     # ******************** GROUP URLS *****************************************
