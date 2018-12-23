@@ -18,16 +18,14 @@ class ItemFilter(django_filters.FilterSet):
         return Tag.objects.all()
     
     def date_gte_filter(queryset, name, value):
-        filter_date_from = value
-        if filter_date_from:
-            date_from = convert_string_date_to_jdate(filter_date_from)
+        if value:
+            date_from = convert_string_date_to_jdate(value)
             if date_from:
                 return queryset.filter(date__gte=date_from)
     
     def date_lte_filter(queryset, name, value):
-        filter_date_from = value
-        if filter_date_from:
-            date_from = convert_string_date_to_jdate(filter_date_from)
+        if value:
+            date_from = convert_string_date_to_jdate(value)
             if date_from:
                 return queryset.filter(date__lte=date_from)
 
