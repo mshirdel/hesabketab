@@ -1,10 +1,42 @@
 {% extends "Accounting/dashboard/base.html" %} 
 {% load static %} 
+{% load humanize %}
 {% block title %} پنل مدیریتی {% endblock title %} 
 {% block content-header %}
     <i class="fas fa-tools"></i>
     صفحه اصلی داشبورد
 {% endblock content-header %}
 {% block content %}
-    
+<div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        {% include 'Accounting/dashboard/components/infobox.html' with text='درآمد' number=income|intcomma icon='fab fa-500px' bgcolor='bg-purple' %}
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        {% include 'Accounting/dashboard/components/infobox.html' with text='هزینه' number=outcome|intcomma icon='fab fa-amazon' bgcolor='bg-green' %}
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        {% include 'Accounting/dashboard/components/infobox.html' with text='تراز' number=balance|intcomma icon='fab fa-adn' bgcolor='bg-orange' %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <table class="table table-strip">
+            <thead>
+                <tr>
+                    <th scope='col'>گروه</th>
+                    <th scope='col'>تومان</th>
+                </tr>
+            </thead>
+            {% for group, value in group_summary.items %}
+                <tr>
+                    <td>{{group}}</td>
+                    <td>{{value}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-md6">
+        tags goes here
+    </div>
+</div>
 {% endblock content %}

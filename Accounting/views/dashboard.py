@@ -3,13 +3,34 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import View
+from django.db.models import Sum
 
 from Accounting.forms import ImportCSVForm
+from Accounting.models import Item, Group, Tag
 
 
 @login_required()
 def dashboard(request):
-    return render(request, 'Accounting/dashboard/index.html')
+    group_summary = {}
+    groups = Group.objects.filter(user=request.user)
+    for group in groups:
+        group_summary[group.name] = Item.objects.filter(
+            user=request.user, group=group).aggregate(Sum('price'))['price__sum']
+
+    expenses = Item.objects.filter(
+        item_type='Exp').aggregate(Sum('price'))['price__sum']
+    income = Item.objects.filter(item_type='In').aggregate(
+        Sum('price'))['price__sum']
+    if not income:
+        income = 0
+    if not expenses:
+        expenses = 0
+    if expenses and income:
+        balance = income - expenses
+    else:
+        balance = 0
+    return render(request, 'Accounting/dashboard/index.html',
+                  {'income': income, 'outcome': expenses, 'balance': balance, 'group_summary': group_summary})
 
 
 @method_decorator(login_required(), name="dispatch")
