@@ -21,7 +21,7 @@ class FilteredSingleTableView(django_tables2.SingleTableView):
 
     def get_table_data(self):
         data = super(FilteredSingleTableView, self).get_table_data()
-        self.filter = self.filter_class(self.request.GET, queryset=data)
+        self.filter = self.filter_class(self.request.GET, queryset=data, request=self.request)
         return self.filter.qs
 
     def get_context_data(self, **kwargs):
