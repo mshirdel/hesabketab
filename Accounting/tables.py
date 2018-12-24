@@ -7,7 +7,9 @@ from .models import Item
 
 class ItemTable(tables.Table):
     def price_sum(table):
-        return f"جمع:‌ {intcomma(sum([row.price for row in table.data]), False)} تومان"
+        income = f"جمع درآمد:‌ {intcomma(sum([row.price for row in table.data if row.item_type == 'In']), False)} تومان"
+        expense = f"جمع هزینه:‌ {intcomma(sum([row.price for row in table.data if row.item_type == 'Exp']), False)} تومان"
+        return format_html(f"<div class='theme-color'>{income} <br/> {expense}</div>")
 
     tags = tables.Column(empty_values=(), verbose_name="تگ‌ها")
     commands = tables.Column(empty_values=(), verbose_name="عملیات")
@@ -16,8 +18,8 @@ class ItemTable(tables.Table):
     def render_commands(self, record):
         return format_html(f"<a href='items/update/{record.id}' class='btn btn-primary btn-sm' >ویرایش</a>&nbsp<a href='items/delete/{record.id}' class='btn btn-danger btn-sm' >حذف</a>")
 
-    def render_price(self, value):
-        return intcomma(value, False)
+    # def render_price(self, value):
+    #     return intcomma(value)
 
     def render_tags(self, record):
         tags = [

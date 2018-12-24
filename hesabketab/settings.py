@@ -125,6 +125,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+FORMAT_MODULE_PATH = [
+    'hesabketab.formats',
+]
+
+USE_THOUSAND_SEPARATOR = True
+
 LOGIN_URL = '/accounts/signin'
 
 # Static files (CSS, JavaScript, Images)

@@ -50,7 +50,7 @@ a {
     background: #fff;
     width: 100%;
     box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
+    border-radius: 5px;
     margin-bottom: 15px;
 }
 
@@ -58,10 +58,11 @@ a {
     display: block;
     min-height: 90px;
     width: 100%;
-    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
-    margin-bottom: 15px;
-    padding-top: 10px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin: 15px;
+    padding: 10px;
+    max-width: 200px;
 }
 
 .info-box-icon {
@@ -126,5 +127,8 @@ a {
 }
 .dark-color{
     color: grey;
+}
+.theme-color{
+    color: #17a2b8;
 }
 /* ========================================================= */

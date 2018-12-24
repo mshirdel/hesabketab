@@ -46,6 +46,7 @@
     <script src="{% static 'Accounting/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'Accounting/js/persian-date.js' %}"></script>
     <script src="{% static 'Accounting/js/persian-datepicker.js' %}"></script>
+    <script src="{% static 'Accounting/js/chart.min.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $(".datepicker").pDatepicker({
@@ -55,6 +56,7 @@
             });
         });
     </script>
+    {% block jsblock %}{% endblock jsblock %}
 </body>
 
 </html>
