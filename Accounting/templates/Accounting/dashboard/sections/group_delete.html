@@ -1,14 +1,27 @@
 {% extends "Accounting/dashboard/base.html" %} 
 {% block title %} پنل مدیریتی {% endblock title %} 
+{% block content-header %}
+    حذف گروه
+{% endblock content-header %}
 {% block content %}
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
         <form action="" method="POST">
             {% csrf_token %}
-            <p>آیا گروه {{object}} حذف شود؟</p>
-            <button type="submit" class="btn btn-danger mt-2">حذف</button>
-            <a href="{% url 'dashboard_groups' %}" class="btn btn-primary mt-2">خیر</a>
+            <div class="alert alert-info">
+                تعداد اعضای این گروه: {{object.item_set.count}}
+            </div>
+            {% if object.item_set.count == 0 %}
+                <div class="alert alert-warning">آیا گروه ({{object}}) حذف شود؟</div>
+                <button type="submit" class="btn btn-danger mt-2">حذف</button>
+                <a href="{% url 'dashboard_groups' %}" class="btn btn-primary mt-2">خیر</a>
+            {% else %}
+                <div class="alert alert-danger">
+                 شما قادر به حذف این گروه نیستید.
+                 </div>
+                 <a href="{% url 'dashboard_groups' %}" class="btn btn-primary mt-2">بازگشت</a>
+            {% endif %}
         </form>
     </div>
     <div class="col-md-3"></div>

@@ -1,15 +1,14 @@
+import jdatetime
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.utils.html import format_html
 from django.views import View
-from django.db.models import Sum
-
-import jdatetime
 
 from Accounting.forms import ImportCSVForm
-from Accounting.models import Item, Group, Tag
+from Accounting.models import Group, Item, Tag
 from Accounting.utils import get_last_12_month_period
 
 
@@ -39,23 +38,23 @@ def dashboard(request):
     else:
         balance = 0
     
-    chart_exp_data = []
-    chart_in_data = []
+    chart_expense_data = []
+    chart_income_data = []
     month_names = []
     today = jdatetime.date.today()
     period = get_last_12_month_period(today)
     for p in period:
         month_names.append(f"{p[0].j_months_fa[p[0].month-1]} {p[0].year}")
-        chart_exp_data.append(Item.objects.filter(user=request.user, item_type='Exp', date__gte=p[0],date__lte=p[1]).aggregate(Sum('price'))['price__sum'])
-        chart_in_data.append(Item.objects.filter(user=request.user, item_type='In', date__gte=p[0],date__lte=p[1]).aggregate(Sum('price'))['price__sum'])
+        chart_expense_data.append(Item.objects.filter(user=request.user, item_type='Exp', date__gte=p[0],date__lte=p[1]).aggregate(Sum('price'))['price__sum'])
+        chart_income_data.append(Item.objects.filter(user=request.user, item_type='In', date__gte=p[0],date__lte=p[1]).aggregate(Sum('price'))['price__sum'])
     
-    chart_exp_data = [0 if value is None else value for value in chart_exp_data]
-    chart_in_data = [0 if value is None else value for value in chart_in_data]
+    chart_expense_data = [0 if value is None else value for value in chart_expense_data]
+    chart_income_data = [0 if value is None else value for value in chart_income_data]
 
     return render(request, 'Accounting/dashboard/index.html',
                   {'income': income, 'outcome': expenses, 'balance': balance, 
                   'group_summary': group_summary, 'tag_summary': tag_summary,
-                  'chart1': chart_exp_data, 'chart2': chart_in_data, 'month_names':month_names})
+                  'chart1': chart_expense_data, 'chart2': chart_income_data, 'month_names':month_names})
 
 
 @method_decorator(login_required(), name="dispatch")
@@ -78,10 +77,10 @@ class DashboardImportCSV(View):
             try:
                 from Accounting.utils import import_items
                 import_items(request.user, file_name)
-            except:
+            except Exception as ex:
                 return render(request, 'Accounting/dashboard/sections/import_scv.html', {
                     'form': form,
-                    'errors': "",
+                    'errors': str(ex),
                 })
             return HttpResponseRedirect("/dashboard/items")
         else:

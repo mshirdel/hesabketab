@@ -22,11 +22,13 @@
     <div class="col-md-12">
         <div class="row">
             {% for group, value in group_summary.items %}
-                <div class="col-md-3 box light-color text-center {% cycle 'bg-green' 'bg-blue' 'bg-purple' 'bg-orange'%}">
-                    <div>گروه {{group}}</div>
-                    <hr class='light-color'>
-                    <div>{{value}} تومان</div>
-                </div>
+                {% if value %}
+                    <div class="col-md-3 box light-color text-center {% cycle 'bg-green' 'bg-blue' 'bg-purple' 'bg-orange'%}">
+                        <div>گروه {{group}}</div>
+                        <hr class='light-color'>
+                        <div>{{value}} تومان</div>
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
@@ -39,11 +41,13 @@
 <div class="row">
     <div class="col-md-12">
         {% for tag, value in tag_summary.items %}
-            <h5>
-            <a href="{% url 'dashboard_tags' %}" class="badge {% cycle 'badge-primary' 'badge-success' 'badge-warning' 'badge-dark' 'badge-info' %}">
-                {{tag}} <span class="badge badge-light">{{value}}</span>
-            </a>
+            {% if value %}
+                <h5>
+                <a href="{% url 'dashboard_tags' %}" class="badge {% cycle 'badge-primary' 'badge-success' 'badge-warning' 'badge-dark' 'badge-info' %}">
+                    {{tag}} <span class="badge badge-light">{{value}}</span>
+                </a>
                 </h5>
+            {% endif %}
         {% endfor %}
     </div>
 </div>

@@ -18,8 +18,9 @@ def import_items(user, file_name='data.csv'):
                                       group=Group.objects.get(id=1),
                                       user=user))
             Item.objects.bulk_create(new_items)
+            # return len(new_items)
     except:
-        raise Exception("Error in importing")
+        raise Exception("خطا در بارگزاری فایل csv")
 
 def convert_string_date_to_jdate(date):
     if date:

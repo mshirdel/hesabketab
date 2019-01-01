@@ -1,22 +1,24 @@
 {% extends "Accounting/dashboard/base.html" %} 
 {% load static %} 
 {% block title %} پنل مدیریتی {% endblock title %} 
+{% block content-header %}
+<div class="row pb-2">
+    <div class="col-md-12">
+        ورود دخل و خرج از فایل csv
+    </div>
+</div>
+{% endblock content-header %}
 {% block content %}
 {% if errors %}
 <div class="alert alert-danger" role="alert">
   {{ errors }}
 </div>
 {% endif %}
-    <h3>ورود دخل و خرج از فایل csv</h3>
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
         <form enctype="multipart/form-data" action="{% url 'dashboard_import_csv' %}" method="POST">
             {% csrf_token %}
-            <!-- <div class="form-group">
-                <label for="{{form.file.id_for_lable}}">فایل:</label>
-                {{form.file}}
-            </div> -->
             {{ form }}
             <button type="submit" class="btn btn-primary mt-2">Import</button>
         </form>
