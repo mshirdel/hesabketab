@@ -1,9 +1,10 @@
+from django.contrib.auth.models import User
 from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render, reverse
+from django.contrib import messages
 
-from django.contrib.auth.models import User
-from Accounting.models import Item
 from Accounting.filters import ItemFilter
+from Accounting.models import Item
 
 
 def index(request):
@@ -18,10 +19,5 @@ def contactus(request):
 
 
 def test(request):
-    user = User.objects.get(pk=1)
-    items = Item.objects.filter(user=user).prefetch_related('group', 'tags') \
-            .order_by('-date')
-    item_filter = ItemFilter({}, queryset = items)
-    # import pdb
-    # pdb.set_trace()
-    return render(request, 'Accounting/test.html', {'filter': item_filter})
+    ages = [5 ,32,34]
+    return render(request, 'Accounting/test.html', {'data': ages})

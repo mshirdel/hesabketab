@@ -1,15 +1,7 @@
-{% extends "Accounting/base.html" %} 
+{% extends "Accounting/base.html" %}
 {% block title %}{% endblock %}
 {% block content %}
-{% if filter %}
-    <form method="get">
-        {{ filter.form.as_table }}
-        <button type="submit" class="btn btn-primary">Search</button>
-    </form>
-    <h3>{{ filter.qs.count }}</h3>
-    {% for item in filter.qs %}
-        {{ item.name }} <br/>
-    {% endfor %}
-{% endif %}
+    {% include 'Accounting/messages.html' %}
+    {{data.0}}
 
 {% endblock content%}

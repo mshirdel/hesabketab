@@ -22,11 +22,11 @@
     <div class="col-md-12">
         <div class="row">
             {% for group, value in group_summary.items %}
-                {% if value %}
+                {% if value.0 %}
                     <div class="col-md-3 box light-color text-center {% cycle 'bg-green' 'bg-blue' 'bg-purple' 'bg-orange'%}">
-                        <div>گروه {{group}}</div>
+                        <a href="{% url 'dashboard_items'%}?group={{value.1}}">گروه {{group}}</a>
                         <hr class='light-color'>
-                        <div>{{value}} تومان</div>
+                        <div>{{value.0}} تومان</div>
                     </div>
                 {% endif %}
             {% endfor %}
@@ -41,10 +41,10 @@
 <div class="row">
     <div class="col-md-12">
         {% for tag, value in tag_summary.items %}
-            {% if value %}
+            {% if value.0 %}
                 <h5>
-                <a href="{% url 'dashboard_tags' %}" class="badge {% cycle 'badge-primary' 'badge-success' 'badge-warning' 'badge-dark' 'badge-info' %}">
-                    {{tag}} <span class="badge badge-light">{{value}}</span>
+                <a href="{% url 'dashboard_items' %}?tags={{value.1}}" class="badge {% cycle 'badge-primary' 'badge-success' 'badge-warning' 'badge-dark' 'badge-info' %}">
+                    {{tag}} <span class="badge badge-light">{{value.0}}</span>
                 </a>
                 </h5>
             {% endif %}
