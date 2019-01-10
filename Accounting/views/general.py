@@ -19,5 +19,4 @@ def contactus(request):
 
 
 def test(request):
-    ages = [5 ,32,34]
-    return render(request, 'Accounting/test.html', {'data': ages})
+    return render(request, 'Accounting/test.html', {'data': 'ok'})
