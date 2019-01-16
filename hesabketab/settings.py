@@ -25,7 +25,7 @@ SECRET_KEY = '2=rgncd8u$bg*=tp!v0)gn=ec5n-okjk22_vw8(892xx2_n%7h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.4', 'localhost']
+ALLOWED_HOSTS = ['192.168.1.4', 'localhost', '127.0.0.1']
 INTERNAL_IPS = ['127.0.0.1']
 
 # Application definition
@@ -137,3 +137,4 @@ LOGIN_URL = '/accounts/signin'
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, "static/")
