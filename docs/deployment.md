@@ -82,7 +82,7 @@ pip install uwsgi
 
 ### Running project with uwsgi
 ```shell
-uwsgi --http :8000 --module hesabketab.wsgi
+uwsgi --socket :8001 --module hesabketab.wsgi
 ```
 
 ### configure nginx

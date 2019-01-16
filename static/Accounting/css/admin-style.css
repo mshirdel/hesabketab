@@ -1,0 +1,134 @@
+@import url(fonts.css);
+
+body {
+    /* font-size: 14px; */
+    font-size: 1rem;
+    font-family: "Yekan", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+    /* color: #5a5a5a; */
+    background: #ecf0f5;
+}
+
+input {
+    font-size: 1rem;
+    font-family: "Yekan", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+}
+
+a {
+    color: #17a2b8;
+}
+
+.admin-panel {
+    background-color: #fff;
+    padding: 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-top-color: #17a2b8;
+    border-top-width: 3px;
+    border-top-style: solid;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px 0px;
+}
+
+.sidebar {
+    background-color: #fff;
+    padding: 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px 0px;
+}
+
+.admin-panel-header {
+    border-bottom-style: solid;
+    border-bottom-color: #ecf0f5;
+    border-bottom-width: 1px;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+}
+
+.info-box {
+    display: block;
+    min-height: 90px;
+    background: #fff;
+    width: 100%;
+    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.box {
+    display: block;
+    min-height: 90px;
+    width: 100%;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin: 15px;
+    padding: 10px;
+    max-width: 200px;
+}
+
+.info-box-icon {
+    border-top-left-radius: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 0;
+    display: block;
+    float: right;
+    height: 90px;
+    width: 90px;
+    text-align: center;
+    font-size: 45px;
+    line-height: 90px;
+    background: rgba(0, 0, 0, 0.2);
+    padding-top: 10px;
+}
+
+.info-box-content {
+    padding: 5px 10px;
+    margin-right: 90px;
+}
+
+.box-content {
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+
+.info-box-text {
+    text-transform: uppercase;
+}
+
+.info-box-number {
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* backgroun colors */
+/* ========================================================*/
+.bg-green {
+    background-color: #28a745 !important;
+}
+
+.bg-blue {
+    background-color: #007bff !important;
+}
+
+.bg-purple {
+    background-color: #6f42c1 !important;
+}
+
+.bg-orange {
+    background-color: #fd7e14 !important;
+}
+/* ========================================================*/
+
+/* foreground colors */
+/* ========================================================= */
+.light-color{
+    color: white;
+}
+.dark-color{
+    color: grey;
+}
+.theme-color{
+    color: #17a2b8;
+}
+/* ========================================================= */
