@@ -15,7 +15,7 @@ def import_items(user, file_name='data.csv'):
                                     date=jdatetime.date(int(item[0].split(
                                         '/')[0]), int(item[0].split('/')[1]), int(item[0].split('/')[2])),
                                     item_type='Exp',
-                                    group=Group.objects.get(id=1),
+                                    group=Group.objects.get(user=user),
                                     user=user))
         Item.objects.bulk_create(new_items)
         return len(new_items)
