@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.utils.html import format_html
 from django.views import View
+from django.conf import settings
 
 from Accounting.forms import ImportCSVForm
 from Accounting.models import Group, Item, Tag
@@ -76,7 +77,7 @@ class DashboardImportCSV(View):
         if form.is_valid():
             uploaded_file = request.FILES['file']
             import uuid
-            file_name = str(uuid.uuid4()) + '.csv'
+            file_name = F"{settings.STATIC_ROOT}{str(uuid.uuid4())}.csv"
             with open(file_name, 'wb+') as destination:
                 for chunk in uploaded_file.chunks():
                     destination.write(chunk)
