@@ -66,7 +66,12 @@ class NewItemView(View):
             item.save()
             for tag in form.cleaned_data["tags"]:
                 item.tags.add(tag)
-            return HttpResponseRedirect('/dashboard/items')
+            if '_save' in request.POST:
+                return HttpResponseRedirect('/dashboard/items')
+            elif '_addanother' in request.POST:
+                return HttpResponseRedirect('/dashboard/items/new')
+            elif '_continue' in request.POST:
+                pass
         else:
             return render(request, 'Accounting/dashboard/sections/item_new.html', {
                 'form': form,
