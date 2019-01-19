@@ -67,6 +67,10 @@ class Item(TimeStampedModel):
             models.Index(fields=['name', 'date'])
         ]
 
+    def get_absolute_url(self):
+        return reverse("dashboard_item_update", kwargs={"pk": self.pk})
+    
+
     def __str__(self):
         return f"{self.name} - {self.price}"
 

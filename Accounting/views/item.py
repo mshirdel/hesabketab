@@ -85,7 +85,7 @@ class ItemUpateView(UpdateView):
     form_class = ItemForm
     # fields = ['name', 'price', 'group', 'tags', 'item_type', 'date']
     template_name = 'Accounting/dashboard/sections/item_update.html'
-    success_url = reverse_lazy("dashboard_items")
+    # success_url = reverse_lazy("dashboard_items")
 
 
 @method_decorator(login_required(), name="dispatch")
