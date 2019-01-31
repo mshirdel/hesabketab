@@ -24,7 +24,7 @@
             {% for group, value in group_summary.items %}
                 {% if value.0 %}
                     <div class="col-md-3 box light-color text-center {% cycle 'bg-green' 'bg-blue' 'bg-purple' 'bg-orange'%}">
-                        <a href="{% url 'dashboard_items'%}?group={{value.1}}">گروه {{group}}</a>
+                        <a class='dashboard-group-links' href="{% url 'dashboard_items'%}?group={{value.1}}">گروه {{group}}</a>
                         <hr class='light-color'>
                         <div>{{value.0}} تومان</div>
                     </div>
