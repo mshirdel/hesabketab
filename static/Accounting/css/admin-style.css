@@ -118,17 +118,26 @@ a {
 .bg-orange {
     background-color: #fd7e14 !important;
 }
+
 /* ========================================================*/
 
 /* foreground colors */
 /* ========================================================= */
-.light-color{
+.light-color {
     color: white;
 }
-.dark-color{
+
+.dark-color {
     color: grey;
 }
-.theme-color{
+
+.theme-color {
     color: #17a2b8;
 }
+
 /* ========================================================= */
+
+.dashboard-group-links {
+    text-decoration: none !important;
+    color: white !important;
+}
