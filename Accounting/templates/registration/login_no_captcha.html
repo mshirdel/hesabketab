@@ -11,12 +11,7 @@
     {% endfor %}
 {% endif %}
 {% if next %}
-    {% if user.is_authenticated %}
-        <p class="alert alert-danger" role="alert">Your account doesn't have access to this page. To proceed, please login with
-        an account that has access.</p>
-    {% else %}
-        <p class="alert alert-danger" role="alert">Please login to see this page.</p>
-    {% endif %}
+    <p class="alert alert-warning" role="alert">برای دسترسی به این قسمت باید وارد سیستم شوید</p>
 {% endif %}
 <div>
     <div class="row justify-content-md-center">
@@ -31,10 +26,6 @@
                 <div class="form-group">
                     <label for="{{form.password.if_for_lable}}">کلمه عبور:</label>
                     {{ form.password }}
-                </div>
-                <div class="form-group">
-                    <label for="{{form.captcha.if_for_lable}}">کد امنیتی:</label>
-                    {{ form.captcha }}
                 </div>
                 <button class="btn btn-success" type="submit">ورود</button>
                 <a href="{% url 'signup' %}" class="btn btn-primary" type="submit">ثبت نام</a>

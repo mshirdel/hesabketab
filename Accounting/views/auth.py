@@ -5,6 +5,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import View
 
+from Accounting.forms import LoginForm
+
 
 def join(request):
     user = User.objects.create_user(
@@ -17,21 +19,42 @@ def signout(request):
     return HttpResponseRedirect(reverse('index'))
 
 
-class SignIn(View):
-    def post(self, request):
-        user = authenticate(
-            username=request.POST['username'], password=request.POST['password'])
-        if user:
-            login(request, user)
-            if request.POST['next']:
-                return HttpResponseRedirect(request.POST['next'])
-            else:
-                return HttpResponseRedirect(reverse('dashboard'))
-        else:
-            return render(request, 'registration/login.html', {'errors': True})
-
+class LoginView(View):
     def get(self, request):
-        data = {}
+        form = LoginForm()
+        next_url = ''
         if request.GET.get('next'):
-            data['next'] = request.GET.get('next')
-        return render(request, 'registration/login.html', data)
+            next_url = request.GET.get('next')
+        return render(request, 'registration/login_no_captcha.html',
+                      {
+                          'form': form,
+                          'next': next_url,
+                      })
+
+    def post(self, request):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password']
+            )
+            if user:
+                login(request, user)
+                if request.POST['next']:
+                    return HttpResponseRedirect(request.POST['next'])
+                else:
+                    return HttpResponseRedirect(reverse('dashboard'))
+            else:
+                return render(request, 'registration/login.html',
+                              {
+                                  'form': form,
+                                  'next': request.POST['next'],
+                                  'errors': form.errors,
+                              })
+        else:
+            return render(request, 'registration/login.html',
+                          {
+                              'form': form,
+                              'next': request.POST['next'],
+                              'errors': form.errors,
+                          })

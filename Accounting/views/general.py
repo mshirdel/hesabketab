@@ -18,5 +18,9 @@ def contactus(request):
     return HttpResponseNotFound('<h1>Page not found</h1>')
 
 
+def signup(request):
+    return render(request, 'registration/signup.html')
+
+
 def test(request):
     return render(request, 'Accounting/test.html', {'data': 'ok'})

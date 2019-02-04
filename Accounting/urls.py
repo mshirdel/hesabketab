@@ -9,11 +9,12 @@ urlpatterns = [
     path('AboutUs/', TemplateView.as_view(template_name="Accounting/aboutus.html"), name='about_us'),
     path('ContactUs/', views.contactus, name='contact_us'),
     path('test/', views.test),
+    path('captcha/', include('captcha.urls')),
     # ******************** ACCOUNTING URLS ************************************
-    # path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/signin', views.SignIn.as_view(), name='signin'),
+    path('accounts/signin', views.LoginView.as_view(), name='signin'),
     path('accounts/signout', views.signout, name='signout'),
     path('accounts/join', views.join, name='join'),
+    path('accounts/signup', views.signup, name='signup'),
 
     # ******************** DASHBOARD URLS *************************************
     path('dashboard/', views.dashboard, name='dashboard'),

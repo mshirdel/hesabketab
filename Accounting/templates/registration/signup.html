@@ -1,0 +1,38 @@
+{% extends "Accounting/base.html" %}
+{% block title %}ورود به سیستم{% endblock %}
+{% block content %}
+{% if errors %}
+<p class="alert alert-danger" role="alert">کلمه عبور یا نام کاربری اشتباه است. دوباره سعی کنید.</p>
+{% endif %}
+{% if next %}
+{% if user.is_authenticated %}
+<p class="alert alert-danger" role="alert">Your account doesn't have access to this page. To proceed, please login with
+    an account that has access.</p>
+{% else %}
+<p class="alert alert-danger" role="alert">Please login to see this page.</p>
+{% endif %}
+{% endif %}
+<div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-5">
+            <form action="{% url 'join'%}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">نام کاربری:</label>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="انتخاب نام کاربری">
+                </div>
+                <div class="form-group">
+                    <label for="email">ایمیل:</label>
+                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">کلمه عبور:</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="کلمه عبور">
+                </div>
+
+                <button type="submit" class="btn btn-primary">ثبت نام</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

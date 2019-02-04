@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_jalali',
     'django_tables2',
     'django_extensions',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -119,3 +120,5 @@ LOGIN_URL = '/accounts/signin'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+CAPTCHA_IMAGE_SIZE=(150,40)

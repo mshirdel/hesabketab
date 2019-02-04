@@ -2,6 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 from django_jalali import forms as jforms
+from captcha.fields import CaptchaField
 
 from Accounting.models import Group, Item, Tag
 
@@ -56,3 +57,12 @@ class ItemForm(forms.ModelForm):
 
 class ImportCSVForm(forms.Form):
     file = forms.FileField()
+
+class LoginForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}
+    ))
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={'class': 'form-control'}
+    ))
+    captcha = CaptchaField()
