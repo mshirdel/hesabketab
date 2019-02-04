@@ -7,8 +7,8 @@
 {% if form.errors %}
     <h1>errors</h1>
     {% for error,desc in form.errors.items %}
-        <div>
-            {{ error }} | {{ desc }}
+        <div class="alert alert-danger">
+            {{ error }} : {{ desc }}
         </div>
     {% endfor %}
 {% endif %}

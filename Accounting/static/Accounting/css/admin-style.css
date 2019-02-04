@@ -141,3 +141,10 @@ a {
     text-decoration: none !important;
     color: white !important;
 }
+
+ul.errorlist li {
+    display: inline;
+    color: rgb(15, 54, 71);
+    font-size: 14px;
+    padding-left: 50px;
+}

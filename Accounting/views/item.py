@@ -8,6 +8,7 @@ from django.views.generic import UpdateView, DeleteView
 from django_tables2.paginators import LazyPaginator
 import django_tables2
 from django.urls import reverse_lazy
+import jdatetime
 
 from Accounting.forms import ItemForm
 from Accounting.models import Group, Item
@@ -21,7 +22,8 @@ class FilteredSingleTableView(django_tables2.SingleTableView):
 
     def get_table_data(self):
         data = super(FilteredSingleTableView, self).get_table_data()
-        self.filter = self.filter_class(self.request.GET, queryset=data, request=self.request)
+        self.filter = self.filter_class(
+            self.request.GET, queryset=data, request=self.request)
         return self.filter.qs
 
     def get_context_data(self, **kwargs):
@@ -47,13 +49,17 @@ class ItemFilteredSingleTableView(FilteredSingleTableView):
 @method_decorator(login_required(), name="dispatch")
 class NewItemView(View):
     def get(self, request):
-        form = ItemForm()
+        form = ItemForm(current_user=request.user,
+                        initial={
+                            'date': jdatetime.date.today(),
+                            'item_type': Item.ITEM_TYPE[1]
+                        })
         return render(request, 'Accounting/dashboard/sections/item_new.html', {
             'form': form,
         })
 
     def post(self, request):
-        form = ItemForm(request.POST)
+        form = ItemForm(data=request.POST, current_user=request.user)
         if form.is_valid():
             item = Item(
                 name=form.cleaned_data["name"],
@@ -86,6 +92,16 @@ class ItemUpateView(UpdateView):
     # fields = ['name', 'price', 'group', 'tags', 'item_type', 'date']
     template_name = 'Accounting/dashboard/sections/item_update.html'
     # success_url = reverse_lazy("dashboard_items")
+    # initial = {}
+
+    def get_form_kwargs(self):
+        """ 
+        ItemForm require current user so we must add current user to 
+        kwargs for initialing ItemForm.
+        """
+        kwargs = super(ItemUpateView, self).get_form_kwargs()
+        kwargs['current_user'] = self.request.user
+        return kwargs
 
 
 @method_decorator(login_required(), name="dispatch")

@@ -30,15 +30,24 @@ class ItemForm(forms.ModelForm):
         attrs={'class': 'form-control'}))
     price = forms.IntegerField(
         widget=forms.NumberInput(attrs={'class': 'form-control'}))
-    # date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'class': 'form-control'}))
     date = jforms.jDateField(widget=jforms.widgets.jDateInput(
         attrs={'class': 'form-control datepicker'}))
-    group = forms.ModelChoiceField(queryset=Group.objects.all(
-    ), widget=forms.Select(attrs={'class': 'form-control'}))
-    tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all(
-    ), widget=forms.SelectMultiple(attrs={'class': 'form-control'}))
+    group = forms.ModelChoiceField(
+        queryset=Group.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'}))
+    tags = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects.all(),
+        widget=forms.SelectMultiple(attrs={'class': 'form-control'}))
     item_type = forms.ChoiceField(widget=forms.Select(
         attrs={'class': 'form-control'}), choices=Item.ITEM_TYPE)
+
+    def __init__(self, current_user=None, * args, **kwargs):
+        super(ItemForm, self).__init__(*args, **kwargs)
+        if current_user:
+            self.fields['group'].queryset = Group.objects.filter(
+                user=current_user)
+            self.fields['tags'].queryset = Tag.objects.filter(
+                user=current_user)
 
     class Meta:
         model = Item
