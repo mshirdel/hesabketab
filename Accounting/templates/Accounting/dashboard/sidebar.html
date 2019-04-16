@@ -1,13 +1,73 @@
-<div class="sidebar">
-<div class="row">
-    <div class="col-md-12">
-        <ul class="list-group">
-            <li class="list-group-item"><a href="{% url 'dashboard'%}">داشبورد</a></li>
-            <li class="list-group-item"><a href="{% url 'dashboard_items'%}">دخل و خرج</a></li>
-            <li class="list-group-item"><a href="{% url 'dashboard_groups'%}">دسته بندی</a></li>
-            <li class="list-group-item"><a href="{% url 'dashboard_tags'%}">مدیریت تگ‌ها</a></li>
-            <li class="list-group-item"><a href="{% url 'dashboard_import_csv'%}">ورود از فایل</a></li>
-        </ul>    
+<div class="menu-icon">
+    <i class="fas fa-bars"></i>
+</div>
+<aside class="sidenav">
+    <div class="sidenav__brand">
+        <i class="fas fa-feather-alt sidenav__brand-icon"></i>
+        <a class="sidenav__brand-link" href="#">دخل و خرج</a>
+        <!-- <i class="fas fa-times sidenav__brand-close"></i> -->
     </div>
-</div>
-</div>
+    <div class="sidenav__profile">
+        <div class="sidenav__profile-avatar"></div>
+        <div class="sidenav__profile-title text-light">میثم شیردل</div>
+    </div>
+    <div class="row-dashboard row--align-v-center row--align-h-center">
+        <ul class="navList">
+            <li>
+                <div class="navList__subheading row row--align-v-center">
+                    <span class="navList__subheading-icon"><i class="fas fa-briefcase-medical"></i></span>
+                    <span class="navList__subheading-title">پنل اصلی</span>
+                </div>
+            </li>
+            <li class="navList__heading">مدیریت دخل و خرج<i class="far fa-file-alt"></i></li>
+            <li>
+                <div class="navList__subheading row row--align-v-center">
+                    <span class="navList__subheading-icon"><i class="fas fa-briefcase-medical"></i></span>
+                    <span class="navList__subheading-title">دخل و خرج</span>
+                </div>
+                <ul class="subList subList--hidden">
+                    <li class="subList__item"><a href="{% url 'dashboard_items'%}">لیست</a></li>
+                    <li class="subList__item">جدید</li>
+                </ul>
+            </li>
+            <li>
+                <div class="navList__subheading row row--align-v-center">
+                    <span class="navList__subheading-icon"><i class="fas fa-plane-departure"></i></span>
+                    <span class="navList__subheading-title">دسته‌بندی</span>
+                </div>
+                <ul class="subList subList--hidden">
+                    <li class="subList__item">لیست</li>
+                    <li class="subList__item">جدید</li>
+                </ul>
+            </li>
+            <li>
+                <div class="navList__subheading row row--align-v-center">
+                    <span class="navList__subheading-icon"><i class="far fa-angry"></i></span>
+                    <span class="navList__subheading-title">تگ‌ها</span>
+                </div>
+                <ul class="subList subList--hidden">
+                    <li class="subList__item">لیست</li>
+                    <li class="subList__item">جدید</li>
+                </ul>
+            </li>
+
+            <li class="navList__heading">مدیریت سیستم<i class="far fa-file-alt"></i></li>
+            <li>
+                <div class="navList__subheading row row--align-v-center">
+                    <span class="navList__subheading-icon"><i class="fas fa-briefcase-medical"></i></span>
+                    <span class="navList__subheading-title">ورود از فایل</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- <div class="sidenav__close-icon">
+        <i class="fas fa-times"></i>
+    </div>
+    <ul class="sidenav__list">
+        <li class="sidenav__list-item"><a href="{% url 'dashboard'%}">داشبورد</a></li>
+        <li class="sidenav__list-item"><a href="{% url 'dashboard_items'%}">دخل و خرج</a></li>
+        <li class="sidenav__list-item"><a href="{% url 'dashboard_groups'%}">دسته بندی</a></li>
+        <li class="sidenav__list-item"><a href="{% url 'dashboard_tags'%}">مدیریت تگ‌ها</a></li>
+        <li class="sidenav__list-item"><a href="{% url 'dashboard_import_csv'%}">ورود از فایل</a></li>
+    </ul> -->
+</aside>

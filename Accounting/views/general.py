@@ -23,4 +23,4 @@ def signup(request):
 
 
 def test(request):
-    return render(request, 'Accounting/test.html', {'data': 'ok'})
+    return render(request, 'Accounting/dashboard/dashboard.html')

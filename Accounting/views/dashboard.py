@@ -58,7 +58,7 @@ def dashboard(request):
     chart_income_data = [
         0 if value is None else value for value in chart_income_data]
 
-    return render(request, 'Accounting/dashboard/index.html',
+    return render(request, 'Accounting/dashboard/dashboard.html',
                   {'income': income, 'outcome': expenses, 'balance': balance,
                    'group_summary': group_summary, 'tag_summary': tag_summary,
                    'chart1': chart_expense_data, 'chart2': chart_income_data, 'month_names': month_names})

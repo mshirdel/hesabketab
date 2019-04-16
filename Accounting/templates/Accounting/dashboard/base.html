@@ -15,32 +15,20 @@
     <link rel="stylesheet" href="{% static 'Accounting/css/bootstrap.css'%}">
 
     <!-- Custom styles for this template -->
-    <link href="{% static 'Accounting/css/admin-style.css'%}" rel="stylesheet">
+    <link href="{% static 'Accounting/css/admin-grid-syle.css'%}" rel="stylesheet">
     <link href="{% static 'Accounting/css/persian-datepicker.css'%}" rel="stylesheet">
     <link href="{% static 'Accounting/css/font-awesome.css'%}" rel="stylesheet">
 </head>
 
 <body>
-    {% include "Accounting/dashboard/nav.html" %}
-    {% include 'Accounting/messages.html' %}
-    <div id="divBase" class="container-fluid">
-        <div class="row">
-            <div class="col-md-3">
-                &nbsp
-                {% include "Accounting/dashboard/sidebar.html" %}
-            </div>
-            <div class="col-md-9">
-                <br/>
-                <div class="admin-panel">
-                    <div class="admin-panel-header">{% block content-header %}
-                    {% endblock content-header %}</div>
-                {% block content %}{% endblock %}
-                </div>
-            </div>
-        </div>
-        
+    <div class="grid-container">
+        {% include "Accounting/dashboard/header.html" %}
+        {% include "Accounting/dashboard/sidebar.html" %}
+        <main class="main">
+            {% block content %}{% endblock %}
+        </main>
+        {% include "Accounting/dashboard/footer.html" %}
     </div>
-    {% include "Accounting/dashboard/footer.html" %}
 
     <script src="{% static 'Accounting/js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'Accounting/js/popper.min.js' %}"></script>
@@ -48,8 +36,9 @@
     <script src="{% static 'Accounting/js/persian-date.js' %}"></script>
     <script src="{% static 'Accounting/js/persian-datepicker.js' %}"></script>
     <script src="{% static 'Accounting/js/chart.min.js' %}"></script>
+    <script src="{% static 'Accounting/js/sidebar.js' %}"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".datepicker").pDatepicker({
                 initialValueType: 'persian',
                 initialValue: false,

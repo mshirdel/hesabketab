@@ -1,0 +1,29 @@
+{% extends "Accounting/dashboard/base.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %} پنل مدیریتی {% endblock title %}
+
+{% block content %}
+<div class="main-header">
+    <div class="main-header__heading">Hello User</div>
+    <div class="main-header__update">Recent Items</div>
+</div>
+<div class="main-overview">
+    <div class="overviewcard">
+        <div class="overviewcard__icon">Icon</div>
+        <div class="overviewcard__info">Card</div>
+    </div>
+    <div class="overviewcard">
+        <div class="overviewcard__icon">Icon</div>
+        <div class="overviewcard__info">Card</div>
+    </div>
+    <div class="overviewcard">
+        <div class="overviewcard__icon">Icon</div>
+        <div class="overviewcard__info">Card</div>
+    </div>
+    <div class="overviewcard">
+        <div class="overviewcard__icon">Icon</div>
+        <div class="overviewcard__info">Card</div>
+    </div>
+</div>
+{% endblock content %}
