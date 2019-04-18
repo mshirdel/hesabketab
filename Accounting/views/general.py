@@ -15,7 +15,7 @@ def index(request):
 
 
 def contactus(request):
-    return HttpResponseNotFound('<h1>Page not found</h1>')
+    return HttpResponseNotFound('<h1>Contact up page not found</h1>')
 
 
 def signup(request):
@@ -23,4 +23,4 @@ def signup(request):
 
 
 def test(request):
-    return render(request, 'Accounting/dashboard/dashboard.html')
+    return render(request, 'Accounting/test.html')

@@ -4,7 +4,7 @@
 <head>
     {% load static %}
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="description" content="">
     <meta name="author" content="">
     <title>
@@ -12,23 +12,39 @@
     </title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="{% static 'Accounting/css/bootstrap.css'%}">
-
-    <!-- Custom styles for this template -->
-    <link href="{% static 'Accounting/css/admin-grid-syle.css'%}" rel="stylesheet">
+    <link href="{% static 'Accounting/css/admin/bootstrap.min.css'%}" rel="stylesheet">
     <link href="{% static 'Accounting/css/persian-datepicker.css'%}" rel="stylesheet">
-    <link href="{% static 'Accounting/css/font-awesome.css'%}" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+    <link href="{% static 'Accounting/css/AdminLTE.css'%}" rel="stylesheet">
+    <link href="{% static 'Accounting/css/skins/skin-blue.min.css'%}" rel="stylesheet">
+    <link href="{% static 'Accounting/css/admin/bootstrap-rtl.min.css'%}" rel="stylesheet">
 </head>
 
-<body>
-    <div class="grid-container">
-        {% include "Accounting/dashboard/header.html" %}
-        {% include "Accounting/dashboard/sidebar.html" %}
-        <main class="main">
-            {% block content %}{% endblock %}
-        </main>
-        {% include "Accounting/dashboard/footer.html" %}
-    </div>
+<body class="skin-blue sidebar-mini">
+    <div class="wrapper">
+        {% include "Accounting/dashboard/admin/header.html" %}
+        {% include "Accounting/dashboard/admin/sidebar.html" %}
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main content -->
+            <section class="content">
+                <div class="box box-primary">
+
+                    <div class="box-body">
+                        {% block content %}
+                        <!-- Your Page Content Here -->
+                        {% endblock %}
+                    </div><!-- /.box-body -->
+
+                </div><!-- /.box -->
+            </section><!-- /.content -->
+        </div><!-- /.content-wrapper -->
+
+        {% include "Accounting/dashboard/admin/footer.html" %}
+    </div><!-- ./wrapper -->
+
 
     <script src="{% static 'Accounting/js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'Accounting/js/popper.min.js' %}"></script>
@@ -36,7 +52,7 @@
     <script src="{% static 'Accounting/js/persian-date.js' %}"></script>
     <script src="{% static 'Accounting/js/persian-datepicker.js' %}"></script>
     <script src="{% static 'Accounting/js/chart.min.js' %}"></script>
-    <script src="{% static 'Accounting/js/sidebar.js' %}"></script>
+    <script src="{% static 'Accounting/js/app.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $(".datepicker").pDatepicker({
